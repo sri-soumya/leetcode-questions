@@ -12,17 +12,19 @@ public:
         for(int i=0;i<n;i++)
         {
             int l=nums[i];
-            int v=0;
-            for(;;l--)
-            {
-                if(x.count(l)&&x[l])
-                {
-                    v++;
-                    x[l]=false;
-                }
-                else
-                    break;
-            }
+            if(x.count(nums[i]-1))
+                continue;
+            int v=1;
+            // for(;;l--)
+            // {
+            //     if(x.count(l)&&x[l])
+            //     {
+            //         v++;
+            //         x[l]=false;
+            //     }
+            //     else
+            //         break;
+            // }
             
             for(l=nums[i]+1;;l++)
             {
