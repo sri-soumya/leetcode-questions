@@ -29,7 +29,10 @@ public:
             for(l=nums[i]+1;;l++)
             {
                 if(x.count(l)&&x[l])
+                {    
                     v++;
+                    x[l]=false;
+                }
                 else
                     break;
             }
