@@ -2,38 +2,31 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         
-        vector<pair<int,int>> a;
-        
         int n=intervals.size();
+        vector<pair<int,int>> a;
         
         for(int i=0;i<n;i++)
         {
             a.push_back({intervals[i][0],intervals[i][1]});
         }
-        
         sort(a.begin(),a.end());
-        
-        vector<pair<int,int>> b;
+        vector<vector<int>> b;
         
         for(int i=0;i<n;i++)
         {
-            int s=a[i].first,maxi=a[i].second;
-            while(i<n-1&&maxi>=a[i+1].first)
+            int x=a[i].first;
+            int y=a[i].second;
+            
+            while(i<n-1&&y>=a[i+1].first)
             {
                 i++;
-                maxi=max(maxi,a[i].second);
+                y=max(y,a[i].second);
             }
             
-            b.push_back({s,maxi});
+            b.push_back({x,y});
         }
         
-        vector<vector<int>> c;
+        return b;
         
-        for(int i=0;i<b.size();i++)
-        {
-            c.push_back({b[i].first,b[i].second});
-        }
-        
-        return c;
     }
 };
