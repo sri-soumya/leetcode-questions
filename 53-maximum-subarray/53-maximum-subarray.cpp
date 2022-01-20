@@ -1,18 +1,20 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        
+        //kadane
         int n=nums.size();
-        int dp[n];
-        dp[0]=nums[0];
-        int ans=dp[0];
-        for(int i=1;i<n;i++)
+        int s=0;
+        int maxi=nums[0];
+        
+        for(int i=0;i<n;i++)
         {
-            dp[i]=max(dp[i-1]+nums[i],nums[i]);
-            ans=max(ans,dp[i]);
+            s+=nums[i];
+            maxi=max(s,maxi);
+            if(s<0)
+                s=0;
         }
         
-        return ans;
+        return maxi;
         
     }
 };
