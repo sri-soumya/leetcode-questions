@@ -20,9 +20,36 @@ public:
         return a;
     }
     
-    double myPow(double x, int n) {
+    double myPow(double x, int m) {
         
-        return solve(x,n);
+        //return solve(x,n);
+        if(m==0)
+            return 1.0;
+        
+        long long n=abs(m);
+        
+        double ans=1.0;
+        
+        while(n>0)
+        {
+            if(n%2)
+            {
+                n--;
+                ans*=x;
+            }
+            
+            else
+            {
+                n/=2;
+                x*=x;
+            }
+        }
+        
+        if(m<0)
+            ans=1/ans;
+        
+        return ans;
+        
         
     }
 };
