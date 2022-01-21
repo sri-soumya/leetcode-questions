@@ -2,6 +2,7 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
      
+        //moor's voting algorithm
         int n=nums.size();
         int c=0;
         int e=0;
