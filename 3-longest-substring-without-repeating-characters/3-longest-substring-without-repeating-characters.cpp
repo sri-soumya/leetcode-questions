@@ -12,7 +12,7 @@ public:
             else
                 c=min(i-x[s[i]],c+1);
             m=max(m,c);
-            cout<<m<<endl;
+            //cout<<m<<endl;
             x[s[i]]=i;
         }
         
