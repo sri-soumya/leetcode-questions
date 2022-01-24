@@ -18,7 +18,7 @@ public:
         
         return m;*/
         
-        //same concept but the below code is more understandable
+        //same concept but the code below is more understandable
         
         int l=0,r=0,m=0;
         
