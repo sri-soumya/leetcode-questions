@@ -3,6 +3,7 @@ public:
     
     int solve(vector<int> nums)
     {
+        //cout<<(nums.size()-1)/2<<endl;
         if(nums.size()==0)
             return INT_MAX;
         if(nums.size()==1)
@@ -16,7 +17,7 @@ public:
         int ll=solve(l);
         int rr=solve(r);
         
-        cout<<m<<" "<<ll<<" "<<nums[m]<<" "<<rr<<endl;
+        //cout<<m<<" "<<ll<<" "<<nums[m]<<" "<<rr<<endl;
         return min(nums[m],min(ll,rr));
         //return min(nums[m],min(solve(l),solve(r)));
     }
