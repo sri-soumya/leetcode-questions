@@ -3,23 +3,22 @@ public:
     
     int solve(vector<int> nums)
     {
-        //cout<<(nums.size()-1)/2<<endl;
-        if(nums.size()==0)
-            return INT_MAX;
-        if(nums.size()==1)
-            return nums[0];
+        int n=nums.size(),lb=0,ub=n-1;
         
-        int n=nums.size();
-        int m=(n-1)/2;
+        while(lb<=ub)
+        {
+            int m=(lb+ub)/2;
+            if(m-1>=0&&nums[m]<nums[m-1])
+                return nums[m];
+            if(m+1<n&&nums[m]>nums[m+1])
+                return nums[m+1];
+            if(nums[lb]<nums[m])
+                lb=m+1;
+            else
+                ub=m-1;
+        }
         
-        vector<int> l(nums.begin(),nums.begin()+m);
-        vector<int> r(nums.begin()+m+1,nums.end());
-        int ll=solve(l);
-        int rr=solve(r);
-        
-        //cout<<m<<" "<<ll<<" "<<nums[m]<<" "<<rr<<endl;
-        return min(nums[m],min(ll,rr));
-        //return min(nums[m],min(solve(l),solve(r)));
+        return nums[0];
     }
     
     int findMin(vector<int>& nums) {
