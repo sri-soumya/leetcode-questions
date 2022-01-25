@@ -29,7 +29,7 @@ public:
         while(stol(s)<=high)
         {
             
-            if(stoi(s)>=low)
+            if(stol(s)>=low)
                 ans.push_back(stol(s));
             
             //cout<<"here"<<endl;
