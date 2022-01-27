@@ -72,14 +72,7 @@ public:
             }
         }
         
-        // for(int i=0;i<n;i++)
-        // {
-        //     for(int j=0;j<n;j++)
-        //         cout<<dp[i][j]<<" ";
-        //     cout<<endl;
-        // }
-        // cout<<x<<" "<<y<<endl;
-        // return "a";
+        
         return s.substr(x,y-x+1);
         
     }
