@@ -8,7 +8,7 @@ public:
         string x="";
         for(int i=0;i<a.length();i++)
         {
-            for(int j=0;j<s.size();j++)
+            for(int j=1;j<s.size();j++)
             {
                 if(a[i]!=s[j][i])
                     return x;
