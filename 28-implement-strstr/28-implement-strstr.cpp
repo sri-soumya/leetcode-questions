@@ -12,51 +12,45 @@ public:
         int i=1,j=0;
         while(i<m)
         {
-            if(a[j]==a[i])
+            if(a[i]==a[j])
             {
                 j++;
                 pi[i]=j;
                 i++;
             }
-            
             else
             {
                 if(j==0)
                 {
-                    
                     pi[i]=0;
                     i++;
                 }
+                
                 else
                     j=pi[j-1];
             }
-            
         }
         
         
-        
-        // for(i=0;i<m;i++)
-        //     cout<<pi[i]<<" ";
-        // cout<<endl;
         
         j=-1,i=0;
         
         while(i<n)
         {
-            //cout<<i<<" "<<j<<" ";
-            
             if(h[i]==a[j+1])
             {
                 i++;
                 j++;
             }
             
-            else if(j==-1)
-                i++;
             else
-                j=pi[j]-1;
-            
-            cout<<i<<" "<<j<<endl;
+            {
+                if(j==-1)
+                    i++;
+                else
+                    j=pi[j]-1;
+                    
+            }
             
             if(j==m-1)
                 return i-m;
