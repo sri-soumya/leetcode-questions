@@ -20,7 +20,7 @@ public:
         {
             dp[i]=new int[s.length()+1];
             for(int j=0;j<=s.length();j++)
-                dp[i][j]=-1;
+                dp[i][j]=0;
         }
         int n=s.length();
         for(int i=0;i<n;i++)
@@ -34,7 +34,7 @@ public:
             }
         }
         
-        return n-dp[n][n]-1;
+        return n-dp[n][n];
         
     }
 };
