@@ -43,8 +43,8 @@ public:
                 t=l1;
                 l1=l1->next;
             }
-            //if(t)
-                t->next=l2;
+            
+            t->next=l2;
             t=l1;
             l1=l2;
             l2=t;
