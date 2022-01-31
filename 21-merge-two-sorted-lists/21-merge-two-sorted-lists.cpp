@@ -24,10 +24,10 @@ public:
         
         while(list1&&list2)
         {
-            //cout<<list1->val<<" "<<list2->val<<" ";
+            
             if(list1->val<list2->val)
             {
-                //cout<<"l1 "<<list1->val<<endl;
+                
                 if(!h)
                 {
                     h=list1;
@@ -44,8 +44,6 @@ public:
             
             else
             {
-                //cout<<"l2 "<<list2->val<<endl;
-                
                 if(!h)
                 {
                     h=list2;
