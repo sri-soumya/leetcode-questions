@@ -19,54 +19,37 @@ public:
         if(!list2)
             return list1;
         
-        ListNode* h=NULL;
-        ListNode* t=NULL;
+        ListNode* l1,*l2,*res;
         
-        while(list1&&list2)
+        if(list1->val<list2->val)
         {
-            
-            if(list1->val<list2->val)
-            {
-                
-                if(!h)
-                {
-                    h=list1;
-                    t=list1;
-                }
-                else
-                {
-                    t->next=list1;
-                    t=t->next;
-                }
-                list1=list1->next;
-                t->next=NULL;
-            }
-            
-            else
-            {
-                if(!h)
-                {
-                    h=list2;
-                    t=list2;
-                }
-                else
-                {
-                    t->next=list2;
-                    t=t->next;
-                }
-                list2=list2->next;
-                t->next=NULL;
-            }
-            
+            res=list1;
+            l1=list1;
+            l2=list2;
         }
         
-        if(list1)
-            t->next=list1;
-        if(list2)
-            t->next=list2;
+        else
+        {
+            res=list2;
+            l1=list2;
+            l2=list1;
+        }
         
-        return h;
-            
+        while(l1&&l2)
+        {
+            ListNode* t=NULL;
+            while(l1&&l1->val<=l2->val)
+            {
+                t=l1;
+                l1=l1->next;
+            }
+            //if(t)
+                t->next=l2;
+            t=l1;
+            l1=l2;
+            l2=t;
+        }
         
+        return res;
     }
 };
