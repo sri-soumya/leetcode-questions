@@ -10,22 +10,16 @@ class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         
-        map<ListNode*,int> x;
+        ListNode* t1=headA;
+        ListNode* t2=headB;
         
-        while(headA)
+        while(t1!=t2)
         {
-            x[headA]++;
-            headA=headA->next;
+            t1=(t1)?t1->next:headB;
+            t2=(t2)?t2->next:headA;
+            
         }
         
-        while(headB)
-        {
-            if(x.count(headB))
-                return headB;
-            headB=headB->next;
-        }
-        
-        return NULL;
-        
+        return t1;
     }
 };
