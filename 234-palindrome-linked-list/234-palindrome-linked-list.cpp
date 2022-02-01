@@ -39,23 +39,20 @@ public:
         ListNode* slow=head;
         ListNode* t=head;
         
-        while(fast&&fast->next)
+        while(fast->next&&fast->next->next)
         {
-            t=slow;
             slow=slow->next;
             fast=fast->next->next;
         }
         
-        t->next=NULL;
-        
-        ListNode* h2=reverse(slow);
-        
-        while(head&&h2)
+        slow->next=reverse(slow->next);
+        slow=slow->next;
+        while(head&&slow)
         {
-            if(head->val!=h2->val)
+            if(head->val!=slow->val)
                 return false;
             head=head->next;
-            h2=h2->next;
+            slow=slow->next;
         }
         
         return true;
