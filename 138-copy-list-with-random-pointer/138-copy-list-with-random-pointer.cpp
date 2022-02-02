@@ -21,28 +21,47 @@ public:
         if(!head)
             return head;
         
-        vector<Node*> a;
-        map<Node*,int> x;
+        Node* nh=NULL;
+        Node* nt=NULL;
         Node* t=head;
-        int c=0;
         while(t)
         {
-            Node* tt=new Node(t->val);
-            a.push_back(tt);
-            x[t]=c++;
-            t=t->next;
+            Node* nn=new Node(t->val);
+            Node* tt=t;
+            
+            nn->next=t->next;
+            t->next=nn;
+            t=nn->next;
         }
         
-        a.push_back(NULL);
         t=head;
-        for(int i=0;i<a.size()-1;i++)
+        
+        while(t)
         {
-            a[i]->next=a[i+1];
-            a[i]->random=(t->random)?a[x[t->random]]:NULL;
+            t->next->random=(t->random)?t->random->next:NULL;
+            t=(t->next)?t->next->next:NULL;
+        }
+        
+        t=head;
+        
+        while(t)
+        {
+            Node* tt=t->next;
+            t->next=tt->next;
+            if(!nh)
+            {
+                nh=tt;
+                nt=tt;
+            }
+            else
+            {
+                nt->next=tt;
+                nt=nt->next;
+            }
+            
             t=t->next;
         }
         
-        return a[0];
-        
+        return nh;
     }
 };
