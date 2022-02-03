@@ -13,28 +13,30 @@ class Solution{
     int findPlatform(int at[], int dt[], int n)
     {
     	// Your code here
-        priority_queue<int,vector<int>,greater<int>> q;
-        int c=0;
-        vector<pair<int,int>> a;
-        for(int i=0;i<n;i++)
-            a.push_back({at[i],dt[i]});
+        int c=1;
+        int m=1;
+        sort(at,at+n);
+        sort(dt,dt+n);
         
-        sort(a.begin(),a.end());
-        for(int i=0;i<n;i++)
+        int i=1,j=0;
+        
+        while(i<n&&j<n)
         {
-            if(!q.size()||a[i].first<=q.top())
+            if(at[i]>dt[j])
             {
-                c++;
-                q.push(a[i].second);
+                c--;
+                j++;
             }
             else
             {
-                q.pop();
-                q.push(a[i].second);
+                i++;
+                c++;
             }
+            m=max(m,c);
         }
         
-        return c;
+        return m;
+        
     }
 };
 
