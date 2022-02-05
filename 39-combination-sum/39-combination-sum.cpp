@@ -13,14 +13,14 @@ public:
             return c;
         }
         
-        vector<vector<int>> d,e,f;
+        vector<vector<int>> d,e;
         d=solve(a,t,b,c,in+1);
         b.push_back(a[in]);
         e=solve(a,t-a[in],b,c,in);
         //f=solve(a,t-a[in],b,c,in+1);
         
         c.insert(c.end(),e.begin(),e.end());
-        c.insert(c.end(),f.begin(),f.end());
+        //c.insert(c.end(),f.begin(),f.end());
         c.insert(c.end(),d.begin(),d.end());
         
         return c;
