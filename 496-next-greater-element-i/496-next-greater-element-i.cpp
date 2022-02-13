@@ -4,7 +4,7 @@ public:
         
         int n1=nums1.size(),n2=nums2.size();
         stack<int> a;
-        unordered_map<int,int> nge;
+        map<int,int> nge;
         vector<int> ans;
         for(int i=n2-1;i>=0;i--)
         {
