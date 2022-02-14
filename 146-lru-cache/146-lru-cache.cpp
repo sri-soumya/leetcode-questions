@@ -16,7 +16,7 @@ class node
 
 class LRUCache {
 public:
-    unordered_map<int,node*> x;
+    map<int,node*> x;
     node* head;
     node* tail;
     int c;
