@@ -48,7 +48,7 @@ public:
             t=x;
             x=y;
             y=t;
-            //swap(x,y);
+            
         }
         
         return h;
@@ -63,15 +63,7 @@ public:
         ListNode* h=lists[0];
         for(int i=1;i<lists.size();i++)
             h=merge(h,lists[i]);
-        
-        // while(h)
-        // {
-        //     cout<<h->val<<" ";
-        //     h=h->next;
-        // }
-        
-        
-        
+       
         return h;
         
     }
