@@ -23,7 +23,33 @@ public:
     
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> a;
-        solve(root,a);
+        //solve(root,a);
+        TreeNode* c=root;
+        while(c)
+        {
+            if(!c->left)
+            {
+                a.push_back(c->val);
+                c=c->right;
+            }
+            else
+            {
+                TreeNode* t=c->left;
+                while(t->right&&t->right!=c)
+                    t=t->right;
+                if(t->right==c)
+                {
+                    t->right=NULL;
+                    c=c->right;
+                }
+                else
+                {
+                    t->right=c;
+                    a.push_back(c->val);
+                    c=c->left;    
+                }
+            }
+        }
         return a;
     }
 };
