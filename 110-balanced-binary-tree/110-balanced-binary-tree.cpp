@@ -12,21 +12,25 @@
 class Solution {
 public:
     
-    int solve(TreeNode* root, bool& f)
+    int solve(TreeNode* root)
     {
         if(!root)
             return 0;
-        int l=solve(root->left,f);
-        int r=solve(root->right,f);
-        f=(f&&abs(l-r)<=1)?true:false;
+        int l=solve(root->left);
+        int r=solve(root->right);
+        if(l==-1||r==-1)
+            return -1;
+        if(abs(l-r)>1)
+            return -1;
         return max(l,r)+1;
     }
     
     bool isBalanced(TreeNode* root) {
         
         bool f=true;
-        solve(root,f);
-        return f;
+        if(solve(root)==-1)
+            return false;
+        return true;
         
     }
 };
