@@ -12,17 +12,19 @@
 class Solution {
 public:
     
-    pair<int,int> solve(TreeNode* root)
+    int solve(TreeNode* root,int& ans)
     {
         if(!root)
-            return {0,0};
-        pair<int,int> l=solve(root->left);
-        pair<int,int> r=solve(root->right);
-        int d=max(l.first,max(r.first,l.second+r.second));
-        return {d,max(l.second,r.second)+1};
+            return 0;
+        int l=solve(root->left,ans);
+        int r=solve(root->right,ans);
+        ans=max(ans,l+r);
+        return max(l,r)+1;
     }
     
     int diameterOfBinaryTree(TreeNode* root) {
-        return solve(root).first;
+        int ans=0;
+        solve(root,ans);
+        return ans;
     }
 };
