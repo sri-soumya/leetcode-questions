@@ -16,16 +16,22 @@ public:
         if(!root)
             return;
         
-        flatten(root->left);
-        flatten(root->right);
-        TreeNode* t=root->right;
-        root->right=root->left;
-        root->left=NULL;
-        TreeNode* tt=root;
-        while(tt->right)
+        TreeNode* cur=root;
+        while(cur)
         {
-            tt=tt->right;
+            //cout<<cur->val<<endl;
+            if(cur->left)
+            {
+                TreeNode* t=cur->left;
+                while(t->right)
+                    t=t->right;
+                t->right=cur->right;
+                cur->right=cur->left;
+                cur->left=NULL;
+            }
+            cur=cur->right;
         }
-        tt->right=t;
+        
+        
     }
 };
