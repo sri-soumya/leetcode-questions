@@ -41,7 +41,7 @@ public:
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string d) {
-        cout<<d<<endl;
+        //cout<<d<<endl;
         int n=d.length();
         if(!n)
             return NULL;
@@ -74,7 +74,7 @@ public:
                 i++;
             }
             i++;
-            cout<<t->val<<" "<<c1<<" "<<c2<<endl;
+            //cout<<t->val<<" "<<c1<<" "<<c2<<endl;
             int c1i=stoi(c1),c2i=stoi(c2);
             if(c1i!=-10000)
             {
