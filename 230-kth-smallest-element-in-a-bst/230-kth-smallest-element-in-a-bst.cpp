@@ -12,21 +12,22 @@
 class Solution {
 public:
     
-    int solve(TreeNode* root,int k,int& c)
+    int solve(TreeNode* root, int k,int &c)
     {
         if(!root)
             return -1;
+        
         int a=solve(root->left,k,c);
+        if(c>=k)
+            return a;
         c++;
         if(c==k)
             return root->val;
-        else if(c<k)
-            return solve(root->right,k,c);
-        return a;
+        return solve(root->right,k,c);
     }
-    
     int kthSmallest(TreeNode* root, int k) {
         int c=0;
+        
         return solve(root,k,c);
     }
 };
