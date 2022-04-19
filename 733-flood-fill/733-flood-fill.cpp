@@ -4,7 +4,7 @@ public:
     
     void solve(vector<vector<int>>& image,int i,int j,int pi,int pj,int nc,int x,vector<vector<int>> &v)
     {
-        cout<<i<<" "<<j<<endl;
+        //cout<<i<<" "<<j<<endl;
         int m=image.size(),n=image[0].size();
         if(i>=m||j>=n||i<0||j<0)
             return;
@@ -28,7 +28,7 @@ public:
     
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         vector<vector<int>> v(image.size(),vector<int>(image[0].size(),0));
-        cout<<v[0].size()<<endl;
+        //cout<<v[0].size()<<endl;
         v[sr][sc]=1;
         int x=image[sr][sc];
         image[sr][sc]=newColor;
