@@ -17,7 +17,7 @@ public:
     
     int longestPalindromeSubseq(string s) {
         int n=s.length();
-        vector<vector<int>> dp(n+2,vector<int>(n+2,0));
+        vector<vector<int>> dp(n+2,vector<int>(n+1,0));
         //return solve(s,1,n,dp);
         
         for(int i=n;i>=1;i--)
