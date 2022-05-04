@@ -17,20 +17,12 @@ public:
             }
         }
         
-        // for(int i=0;i<=n;i++)
-        // {
-        //     for(int j=0;j<=m;j++)
-        //         cout<<dp[i][j]<<" ";
-        //     cout<<endl;
-        // }
-        // cout<<endl;
         int i=n,j=m;
         string c="";
         while(i>0&&j>0)
         {
             if(dp[i][j]!=dp[i-1][j]&&dp[i][j]!=dp[i][j-1])
             {
-                //cout<<a[i-1];
                 c=b[j-1]+c;
                 i--;
                 j--;
@@ -39,13 +31,11 @@ public:
             {
                 if(dp[i-1][j]>dp[i][j-1])
                 {
-                    //cout<<b[j-1];
                     c=a[i-1]+c;
                     i--;
                 }
                 else
                 {
-                    //cout<<a[i-1];
                     c=b[j-1]+c;
                     j--;
                 }
