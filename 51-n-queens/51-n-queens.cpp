@@ -1,68 +1,64 @@
 class Solution {
 public:
     
-    void print(vector<int> cols)
+    bool safe(vector<string> b,int n,int i,int j)
     {
-        for(int i=0;i<cols.size();i++)
-            cout<<cols[i]<<" ";
-        cout<<endl;
-    }
-    
-    bool isvalid(int in,int r,vector<int> cols)
-    {
-        for(int i=0;i<r;i++)
-        {
-            if(cols[i]==in||(abs(i-r)==abs(cols[i]-in)))
+        for(int x=0;x<i;x++)
+            if(b[x][j]=='Q')
                 return false;
-                
+        
+        int x=i,y=j;
+        
+        while(x>=0&&y>=0)
+        {
+            if(b[x][y]=='Q')
+                return false;
+            x--;y--;
         }
         
-        if(r>0&&(cols[r-1]==in-1||cols[r-1]==in+1))
-            return false;
+        x=i;y=j;
+        
+        while(y<n&&x>=0)
+        {
+            if(b[x][y]=='Q')
+                return false;
+            x--;y++;
+        }
         
         return true;
     }
     
-    void solve(int in,int n,vector<vector<string>>& a,vector<string>& b, vector<int>& cols,string s)
+    bool solve(vector<vector<string>> &a,vector<string> &b,int n,int i)
     {
-        if(in>=n)
+        if(i==n)
         {
-            if(b.size()==n)
             a.push_back(b);
-            return;
+            return true;
         }
         
-        for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
         {
-            
-            if(isvalid(i,in,cols))
+            if(safe(b,n,i,j))
             {
-                cols[in]=i;
-                s[i]='Q';
-                b.push_back(s);
-                s[i]='.';
-                solve(in+1,n,a,b,cols,s);
-                  
-                cols[in]=-1;
-                b.pop_back();
-                
+                b[i][j]='Q';
+                solve(a,b,n,i+1);
             }
+            
+            b[i][j]='.';
         }
+        
+        return false;
     }
     
     vector<vector<string>> solveNQueens(int n) {
-        
-        vector<vector<string>> a;
-        string s="";
+        string a="";
         for(int i=0;i<n;i++)
-        {
-            s+=".";
-            //a[i]=vector<string>(n,".");
-        }
-               
-        vector<string> b;
-        vector<int> cols(n,-1);
-        solve(0,n,a,b,cols,s);
-        return a;
+            a+=".";
+        
+        vector<vector<string>> ans;
+        vector<string> b(n,a);
+        
+        solve(ans,b,n,0);
+        return ans;
     }
 };
