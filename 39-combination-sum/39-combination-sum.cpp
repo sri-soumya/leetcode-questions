@@ -1,25 +1,30 @@
 class Solution {
 public:
     
-    void solve(vector<int> a,int t,vector<int> b,vector<vector<int>> &c,int i)
+    void solve(vector<vector<int>> &a,vector<int> b,vector<int> c,int i,int t)
     {
-        int n=a.size();
-        if(i>=n||t<=0)
+        
+        if(t<0)
+            return;
+        
+        if(i<0||!t)
         {
             if(!t)
-                c.push_back(b);
+                a.push_back(b);
             return;
         }
         
-        solve(a,t,b,c,i+1);
-        b.push_back(a[i]);
-        solve(a,t-a[i],b,c,i);
+        solve(a,b,c,i-1,t);
+        b.push_back(c[i]);
+        solve(a,b,c,i,t-c[i]);
+        //b.pop_back();
     }
     
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    vector<vector<int>> combinationSum(vector<int>& c, int t) {
+        vector<vector<int>> a;
         vector<int> b;
-        vector<vector<int>> c;
-        solve(candidates,target,b,c,0);
-        return c;
+        
+        solve(a,b,c,c.size()-1,t);
+        return a;
     }
 };
