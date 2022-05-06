@@ -25,21 +25,23 @@ public:
     int maxProfit(vector<int>& a) {
         
         int n=a.size();
-        vector<vector<int>> dp(n+1,vector<int>(2,0));
+        //vector<vector<int>> dp(n+1,vector<int>(2,0));
         //return solve(a,0,1,dp);
-        
+        vector<int> ahead(2,0),cur(2,0);
         for(int i=n-1;i>=0;i--)
         {
             for(int j=0;j<2;j++)
             {
                 if(j)
-                    dp[i][j]=max(-a[i]+dp[i+1][0],dp[i+1][1]);
+                    cur[j]=max(-a[i]+ahead[0],ahead[1]);
                 else
-                    dp[i][j]=max(a[i]+dp[i+1][1],dp[i+1][0]);
+                    cur[j]=max(a[i]+ahead[1],ahead[0]);
             }
+            
+            ahead=cur;
         }
         
-        return dp[0][1];
+        return cur[1];
         
     }
 };
