@@ -12,9 +12,9 @@ public:
             for(int f=0;f<=1;f++)
             {
                 if(f)
-                    dp[i][f]=max(-a[i]+dp[i+1][0]-fee,dp[i+1][1]);
+                    dp[i][f]=max(-a[i]+dp[i+1][0],dp[i+1][1]);
                 else
-                    dp[i][f]=max(a[i]+dp[i+1][1],dp[i+1][0]);
+                    dp[i][f]=max(a[i]+dp[i+1][1]-fee,dp[i+1][0]);
             }
         }
         
