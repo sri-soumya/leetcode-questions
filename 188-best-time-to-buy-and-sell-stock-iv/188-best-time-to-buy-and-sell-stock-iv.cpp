@@ -3,8 +3,10 @@ public:
     int maxProfit(int m, vector<int>& a) {
         
         int n=a.size();
-        vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(2,vector<int>(m+1,0)));
+        //vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(2,vector<int>(m+1,0)));
         //return solve(a,0,1,2,dp);
+        
+        vector<vector<int>> ahead(2,vector<int>(m+1,0)),cur(2,vector<int>(m+1,0));
         
         for(int i=n-1;i>=0;i--)
         {
@@ -14,17 +16,19 @@ public:
                 {
                     if(f)
                     {
-                        dp[i][f][k]=max(-a[i]+dp[i+1][0][k],dp[i+1][1][k]);
+                        cur[f][k]=max(-a[i]+ahead[0][k],ahead[1][k]);
                     }
                     else
                     {
-                        dp[i][f][k]=max(a[i]+dp[i+1][1][k-1],dp[i+1][0][k]);
+                        cur[f][k]=max(a[i]+ahead[1][k-1],ahead[0][k]);
                     }
                 }
             }
+            
+            ahead=cur;
         }
         
-        return dp[0][1][m];
+        return ahead[1][m];
         
     }
 };
