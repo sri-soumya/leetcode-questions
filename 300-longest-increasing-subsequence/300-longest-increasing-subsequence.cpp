@@ -1,30 +1,32 @@
 class Solution {
 public:
     
-    int solve(vector<int> &a,int i,vector<int> &dp)
+    int solve(vector<int> &a,int i,int j,vector<vector<int>> &dp)
     {
-        if(i==0)
-            return 1;
+        int n=a.size();
+        if(i==n)
+            return 0;
         
-        if(dp[i]!=-1)
-            return dp[i];
+        if(j!=-1&&dp[i][j]!=-1)
+            return dp[i][j];
         
-        int c=0;
-    
-        for(int j=i-1;j>=0;j--)
-        {
-            if(a[j]<a[i])
-                c=max(c,solve(a,j,dp));
-        }
+        int c1=solve(a,i+1,j,dp);
+        int c2=0;
+        if(j==-1||a[j]<a[i])
+            c2=1+solve(a,i+1,i,dp);
         
-        return dp[i]= c+1;
+        if(j!=-1)
+            dp[i][j]=max(c1,c2);
+        
+        return max(c1,c2);
     }
     
     int lengthOfLIS(vector<int>& a) {
         int c=0,n=a.size();
-        vector<int> dp(n+1,-1);
-        for(int i=n-1;i>=0;i--)
-            c=max(c,solve(a,i,dp));
-        return c;
+        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        return solve(a,0,-1,dp);
+        
     }
+    
+    
 };
