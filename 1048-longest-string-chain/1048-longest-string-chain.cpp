@@ -55,12 +55,43 @@ public:
     int longestStrChain(vector<string>& a) {
         int n=a.size();
         sort(a.begin(),a.end(),compare);
-        // for(int i=0;i<n;i++)
-        //     cout<<a[i]<<" ";
-        // cout<<endl;
         
-        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        //vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        vector<int> dp(n,1);
+        int m=1;
         
-        return solve(a,0,-1,dp);
+        for(int i=n-2;i>=0;i--)
+        {
+            int c=0;
+            for(int j=i+1;j<n;j++)
+            {
+                int nn=a[j].length(),mm=a[i].length(),x=0,y=0;
+                bool f=true;
+                
+                while(x<nn&&y<mm)
+                {
+                    if(a[j][x]==a[i][y])
+                    {
+                        x++;
+                        y++;
+                    }
+                    
+                    else
+                        x++;
+                }
+                
+                if(y<mm&&x>=nn)
+                    f=false;
+                if(f&&((nn-mm)==1))
+                  c=max(c,dp[j]);  
+            }
+            
+            dp[i]=c+1;
+            m=max(m,dp[i]);
+        }
+        
+        return m;
+        
+        //return solve(a,0,-1,dp);
     }
 };
