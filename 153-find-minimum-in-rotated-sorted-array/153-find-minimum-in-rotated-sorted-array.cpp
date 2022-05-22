@@ -1,24 +1,23 @@
 class Solution {
 public:
     
-    int solve(vector<int> nums)
+    int solve(vector<int> a)
     {
-        int n=nums.size(),lb=0,ub=n-1;
-        
-        while(lb<=ub)
+        int n=a.size(),l=0,u=n-1;
+        int s=0;
+        while(l<=u)
         {
-            int m=(lb+ub)/2;
-            if(m-1>=0&&nums[m]<nums[m-1])
-                return nums[m];
-            if(m+1<n&&nums[m]>nums[m+1])
-                return nums[m+1];
-            if(nums[lb]<nums[m])
-                lb=m+1;
+            int m=(l+u)/2;
+            if(a[0]>a[m])
+            {
+                s=m;
+                u=m-1;
+            }
             else
-                ub=m-1;
+                l=m+1;
         }
         
-        return nums[0];
+        return a[s];
     }
     
     int findMin(vector<int>& nums) {
