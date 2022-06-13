@@ -11,7 +11,8 @@ public:
             dp[i][0]=a[i][0];
             s+=a[i][0];
         }
-        for(int i=0;i<m;i++)
+
+        for(int i=1;i<m;i++)
         {
             dp[0][i]=a[0][i];
             s+=a[0][i];
@@ -27,14 +28,8 @@ public:
                 s+=dp[i][j];
             }
         }
-        s=0;
         
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-                s+=dp[i][j];
-        }
         return s;
-        
+       
     }
 };
