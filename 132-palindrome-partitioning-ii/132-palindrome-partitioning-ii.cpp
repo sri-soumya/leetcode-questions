@@ -11,9 +11,6 @@ public:
     int solve(string &s,int i,int j,vector<int> &dp)
     {
         
-        if(i>j)
-            return -1;
-        
         if(i==j)
             return 0;
         
@@ -21,7 +18,7 @@ public:
             return dp[i];
         
         int ans=INT_MAX;
-        for(int k=i;k<=j;k++)
+        for(int k=i;k<j;k++)
         {
             if(ispal(s,i,k))
             {
@@ -38,8 +35,8 @@ public:
         
         int n=s.length();
         vector<int> dp(n+1,-1);        
-        //int a= solve(s,0,n-1,dp);
-        //return a;
+        int a= solve(s,0,n,dp)-1;
+        return a;
         
         for(int i=0;i<n;i++)
             dp[i]=0;
