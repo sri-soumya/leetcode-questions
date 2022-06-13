@@ -1,32 +1,51 @@
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& heights) {
-        int ans=0;
-        stack<int> x;
-        int n=heights.size();
+    int largestRectangleArea(vector<int>& a) {
+        
+        int n=a.size();
+        vector<int> l(n,0),r(n,0);
+        stack<int> s;
+        
         for(int i=0;i<n;i++)
         {
-            while(x.size()&&heights[x.top()]>=heights[i])
+            while(s.size()&&a[s.top()]>=a[i])
             {
-                int j=x.top();
-                x.pop();
-                int pa=(x.size())?heights[j]*(i-x.top()-1):heights[j]*i;
-                
-                ans=max(ans,pa);
+                s.pop();
             }
-            x.push(i);
-            
+            if(s.size())
+                l[i]=s.top()+1;
+            else
+                l[i]=0;
+            s.push(i);
         }
         
-        while(x.size())
+        while(s.size())
         {
-            int j=x.top();
-            x.pop();
-            int pa=(x.size())?heights[j]*(n-x.top()-1):heights[j]*n;
-            
-            ans=max(ans,pa);
+            s.pop();
+        }
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            while(s.size()&&a[s.top()]>=a[i])
+            {
+                s.pop();
+            }
+            if(s.size())
+                r[i]=s.top()-1;
+            else
+                r[i]=n-1;
+            s.push(i);
+        }
+        
+        int ans=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            //cout<<l[i]<<" "<<r[i]<<endl;
+            ans=max(ans,a[i]*abs(r[i]-l[i]+1));
         }
         
         return ans;
+        
     }
 };
