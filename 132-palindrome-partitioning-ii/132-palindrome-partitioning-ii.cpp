@@ -37,10 +37,29 @@ public:
     int minCut(string s) {
         
         int n=s.length();
-        vector<int> dp(n,-1);        
-        int a= solve(s,0,n-1,dp);
-        return a;
+        vector<int> dp(n+1,-1);        
+        //int a= solve(s,0,n-1,dp);
+        //return a;
         
+        for(int i=0;i<n;i++)
+            dp[i]=0;
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            int ans=INT_MAX;
+            for(int k=i;k<n;k++)
+            {
+                if(ispal(s,i,k))
+                {
+                    int x=dp[k+1]+1;
+                    ans=min(ans,x);
+                }
+            }
+            
+            dp[i]=ans;
+        }
+        
+        return dp[0];
         
     }
 };
