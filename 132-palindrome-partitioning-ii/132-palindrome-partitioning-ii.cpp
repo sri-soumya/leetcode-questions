@@ -34,9 +34,9 @@ public:
     int minCut(string s) {
         
         int n=s.length();
-        vector<int> dp(n+1,-1);        
-        int a= solve(s,0,n,dp)-1;
-        return a;
+        vector<int> dp(n+1,0);        
+//         int a= solve(s,0,n,dp)-1;
+//         return a;
         
         for(int i=0;i<n;i++)
             dp[i]=0;
@@ -56,7 +56,7 @@ public:
             dp[i]=ans;
         }
         
-        return dp[0];
+        return dp[0]-1;
         
     }
 };
