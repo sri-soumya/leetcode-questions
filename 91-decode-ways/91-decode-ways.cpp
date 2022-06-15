@@ -39,9 +39,35 @@ public:
         
         int n=s.length();
         
-        vector<int> dp(n,-1);
+        vector<int> dp(n+1,0);
         
-        return solve(s,0,dp);
+        //return solve(s,0,dp);
         
+        dp[n]=1;
+        
+        // for(int i=0;i<n;i++)
+        // {
+        //     if(s[i]=='0')
+        //         dp[i]=0;
+        // }
+        
+        for(int i=n-1;i>=0;i--)
+        {
+            if(s[i]=='0')
+                continue;
+            
+            int ans=0;
+            for(int j=1;j<=2;j++)
+            {
+                if(i+j>n)
+                    break;
+                if(check(s.substr(i,j)))
+                    ans+=dp[i+j];
+            }
+            
+            dp[i]=ans;
+        }
+        
+        return dp[0];
     }
 };
