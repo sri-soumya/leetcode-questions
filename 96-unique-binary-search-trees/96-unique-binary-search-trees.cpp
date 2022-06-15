@@ -16,13 +16,28 @@ public:
             ans+=max(1,solve(i-1,dp))*max(1,solve(n-i,dp));
         }
         
-        return ans;
+        return dp[n]= ans;
     }
     
     int numTrees(int n) {
         
-        vector<int> dp(n+1,-1);
+        if(n<=2)
+            return n;
         
-        return solve(n,dp);
+        vector<int> dp(n+1,0);
+        
+        //return solve(n,dp);
+        
+        dp[1]=1;dp[2]=2;
+        
+        for(int i=3;i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                dp[i]+=max(1,dp[j-1])*max(1,dp[i-j]);
+            }
+        }
+        
+        return dp[n];
     }
 };
