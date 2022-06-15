@@ -26,9 +26,25 @@ public:
     bool canJump(vector<int>& a) {
         int n=a.size();
         
-        vector<int> dp(n,-1);
+        vector<int> dp(n,0);
         
-        return solve(a,0,dp);
+        dp[n-1]=1;
+        
+        for(int i=n-2;i>=0;i--)
+        {
+            for(int j=1;j<=a[i];j++)
+            {
+                if(dp[i+j])
+                {
+                    dp[i]=true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[0];
+        
+        //return solve(a,0,dp);
         
     }
 };
