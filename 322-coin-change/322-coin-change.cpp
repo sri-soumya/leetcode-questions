@@ -20,18 +20,36 @@ public:
         return dp[i][t]= min(op1,op2);
     }
     
-    int coinChange(vector<int>& a, int t) {
+    int coinChange(vector<int>& a, int k) {
         
         int n=a.size();
         
-        vector<vector<int>> dp(n,vector<int>(t+1,-1));
+        vector<vector<int>> dp(n,vector<int>(k+1,0));
+//         int c=solve(a,k,0,dp);
         
+//         if(c>t)
+//             return -1;
+//         return c;    
         
-        int c=solve(a,t,0,dp);
+        for(int i=n-1;i>=0;i--)
+        {
+            for(int t=1;t<=k;t++)
+            {
+                int op1=1e8,op2=1e8;
+                if(t-a[i]>=0)
+                    op1=dp[i][t-a[i]]+1;
+                if(i+1<n)
+                    op2=dp[i+1][t];
+                
+                dp[i][t]=min(op1,op2);
+            }
+        }
         
-        if(c>t)
+        if(dp[0][k]>k)
             return -1;
-        return c;    
+        
+        return dp[0][k];
+        
         
     }
 };
