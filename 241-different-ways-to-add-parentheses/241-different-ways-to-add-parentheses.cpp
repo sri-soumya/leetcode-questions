@@ -22,11 +22,14 @@ public:
         }
     }
     
-    vector<int> solve(string &s,int i,int j)
+    vector<int> solve(string &s,int i,int j, vector<vector<vector<int>>> &dp)
     {
         vector<int> a;
         if(i>j)
             return a;
+        
+        if(dp[i][j].size()!=0)
+            return dp[i][j];
         
         int c=0;
         
@@ -36,15 +39,15 @@ public:
                 continue;
             c++;
             vector<int> b,c;
-            b=solve(s,i,k-1);
-            c=solve(s,k+1,j);
+            b=solve(s,i,k-1,dp);
+            c=solve(s,k+1,j,dp);
             combine(a,b,c,s[k]);
         }
         
         if(!c)
             a.push_back(stoi(s.substr(i,j-i+1)));
         
-        return a;
+        return dp[i][j]= a;
     }
         
     
@@ -52,7 +55,9 @@ public:
         
         int n=s.length();
         
-        return solve(s,0,n-1);
+        vector<vector<vector<int>>> dp(n,vector<vector<int>>(n));
+        
+        return solve(s,0,n-1,dp);
         
     }
 };
