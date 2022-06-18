@@ -5,9 +5,7 @@ public:
     {
         if(n<=1)
             return n;
-        // if(n<=3)
-        //     return n-1;
-        
+
         if(dp[n]!=-1)
             return dp[n];
         
@@ -16,7 +14,6 @@ public:
         for(int i=1;i<n;i++)
         {
             a=max(a,i*solve(n-i,dp));
-            //cout<<i<<" "<<a<<endl;
         }
         
         return dp[n]= max(a,n);
@@ -29,9 +26,21 @@ public:
         if(n==3)
             return 2;
         
-        vector<int> dp(n+1,-1);
+        vector<int> dp(n+1,0);
         
-        return solve(n,dp);
+        //return solve(n,dp);
+        
+        dp[0]=0;dp[1]=1;
+        
+        for(int i=0;i<=n;i++)
+        {
+            int a=0;
+            for(int j=1;j<i;j++)
+                a=max(a,j*dp[i-j]);
+            dp[i]=max(a,i);
+        }
+        
+        return dp[n];
         
     }
 };
