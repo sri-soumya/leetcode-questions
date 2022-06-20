@@ -29,23 +29,6 @@ class Node
         return f;
     }
     
-    int solve(Node* root)
-    {
-        int s=0,z=0;
-        
-        for(int i=0;i<26;i++)
-        {
-            if(!root->a[i])
-                continue;
-            int x=solve(root->a[i])+1;
-            s+=x;
-            z++;
-        }
-        
-        if(!z)
-            s++;
-        return s;
-    }
     
 };
 
@@ -111,11 +94,6 @@ public:
         
     }
     
-    int solve()
-    {
-        return root->solve(root);
-    }
-    
 };
 
 class Solution {
@@ -142,7 +120,6 @@ public:
         {
             s+=ob.insert(a[i]);
         }
-        int x=ob.solve();
         return s;
         
     }
