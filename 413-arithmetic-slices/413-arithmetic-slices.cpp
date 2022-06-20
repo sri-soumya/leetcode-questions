@@ -3,12 +3,10 @@ public:
     
     int numberOfArithmeticSlices(vector<int>& a) {
      
-        int n=a.size();
+        int n=a.size(),s=0;
         
         if(n<3)
             return 0;
-        
-        vector<int> b;
         int d=a[1]-a[0];
         int c=2;
         
@@ -18,20 +16,14 @@ public:
                 c++;
             else
             {
-                b.push_back(c);
+                //b.push_back(c);
+                s+=(c*(c+1))/2-(2*c-1);
                 c=2;
                 d=a[i]-a[i-1];
             }
         }
+        s+=(c*(c+1))/2-(2*c-1);
         
-        b.push_back(c);
-        
-        int s=0;
-        for(int i=0;i<b.size();i++)
-        {
-            s+=(b[i]*(b[i]+1))/2-(2*b[i]-1);
-        }
         return s;
-        
     }
 };
