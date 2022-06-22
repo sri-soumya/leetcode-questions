@@ -26,9 +26,25 @@ public:
     
     int minSteps(int n) {
         
-        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+        vector<vector<int>> dp(n+1,vector<int>(n+1,0));
         
-        return solve(1,0,n,dp);
+        //return solve(1,0,n,dp);
+        
+        for(int i=n-1;i>=1;i--)
+        {
+            for(int j=n;j>=0;j--)
+            {
+                int op1=1e7,op2=1e7;
+                if(i>j)
+                    op1=dp[i][i]+1;
+                if(j&&i+j<=n)
+                    op2=dp[i+j][j]+1;
+                
+                dp[i][j]=min(op1,op2);
+            }
+        }
+        
+        return dp[1][0];
         
     }
 };
