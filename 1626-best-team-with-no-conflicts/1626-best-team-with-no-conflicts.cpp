@@ -34,9 +34,25 @@ public:
         
         sort(c.begin(),c.end());
         
-        vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
+       // vector<vector<int>> dp(n+1,vector<int>(n+1,-1));
         
-        return solve(c,n,0,dp);
+        //return solve(c,n,0,dp);
+        
+        vector<int> dp(n+1,0);
+        int m=0;
+        for(int i=1;i<=n;i++)
+        {
+            dp[i]=c[i-1].second;
+            
+            for(int j=i-1;j>=1;j--)
+            {
+                if(c[j-1].second<=c[i-1].second)
+                    dp[i]=max(dp[i],dp[j]+c[i-1].second);
+            }
+            m=max(m,dp[i]);
+        }
+        
+        return m;
         
     }
 };
