@@ -11,9 +11,7 @@ public:
         if(dp[i][p]!=-1)
             return dp[i][p];
         
-        if(p!=0&&a[i-1].first>a[p].first&&a[i-1].second<a[p].second)
-            f=false;
-        else if(p!=0&&a[p].first>a[i-1].first&&a[p].second<a[i-1].second)
+        if(p!=0&&a[i-1].second>a[p].second)
             f=false;
             
         int op1=0,op2=0;
