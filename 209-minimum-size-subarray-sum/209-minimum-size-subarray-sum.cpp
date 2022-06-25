@@ -13,11 +13,6 @@ public:
         {
             if(p[i]<t)
                 continue;
-            if(p[i]==t)
-            {
-                ans=min(ans,i+1);
-                continue;
-            }
             int x=lower_bound(p.begin(),p.end(),p[i]-t)-p.begin();
             int d=i-x+1;
             if(p[x]==p[i]-t)
