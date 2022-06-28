@@ -8,7 +8,6 @@ public:
         
         for(int i=0;i<n;i++)
         {
-            //mp[s[i]-'a']++;
             a[s[i]-'a']++;
         }
         
@@ -32,26 +31,6 @@ public:
             if(j)
                 mp[j]++;
         }
-        
-//         for(int i=0;i<26;i++)
-//         {
-//             if(a[i]==0||mp[a[i]]==1)
-//                 continue;
-            
-//             int j;
-//             for(j=a[i];j>=0;j--)
-//             {
-//                 if(!mp.count(j))
-//                     break;
-                
-//             }
-            
-//             mp[a[i]]--;
-//             c+=a[i]-j;
-//             if(j)
-//                 mp[j]++;
-//         }
-        
         return c;
     }
 };
