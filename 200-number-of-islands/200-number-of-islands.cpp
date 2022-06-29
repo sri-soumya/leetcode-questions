@@ -1,30 +1,31 @@
 class Solution {
 public:
     
-    void dfs(vector<vector<char>> &a,int i,int j)
+    void dfs(vector<vector<char>>& a,int i,int j)
     {
-        int n=a.size(),m=a[0].size();
+        
+        int m=a.size(),n=a[0].size(),c=0;
+        
+        if(i<0||i>=m||j<0||j>=n||a[i][j]=='0')
+            return;
         
         a[i][j]='0';
-        int dy[4]={-1,0,0,1};
-        int dx[4]={0,-1,1,0};
         
-        for(int x=0;x<4;x++)
-        {
-            if(i+dy[x]<0||i+dy[x]>=n||j+dx[x]<0||j+dx[x]>=m||a[i+dy[x]][j+dx[x]]=='0')
-                continue;
-            dfs(a,i+dy[x],j+dx[x]);
-        }
+        dfs(a,i+1,j);
+        dfs(a,i-1,j);
+        dfs(a,i,j+1);
+        dfs(a,i,j-1);
+        
+        
     }
-    
     
     int numIslands(vector<vector<char>>& a) {
         
-        int n=a.size(),m=a[0].size(),c=0;
+        int m=a.size(),n=a[0].size(),c=0;
         
-        for(int i=0;i<n;i++)
+        for(int i=0;i<m;i++)
         {
-            for(int j=0;j<m;j++)
+            for(int j=0;j<n;j++)
             {
                 if(a[i][j]=='0')
                     continue;
@@ -32,7 +33,7 @@ public:
                 dfs(a,i,j);
             }
         }
-        
         return c;
+        
     }
 };
