@@ -8,18 +8,19 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+    ListNode *getIntersectionNode(ListNode *h1, ListNode *h2) {
         
-        ListNode* t1=headA;
-        ListNode* t2=headB;
+        ListNode* t1=h1;
+        ListNode* t2=h2;
         
         while(t1!=t2)
         {
-            t1=(t1)?t1->next:headB;
-            t2=(t2)?t2->next:headA;
+            t1=(t1)?t1->next:h2;
+            t2=(t2)?t2->next:h1;
             
         }
         
         return t1;
+        
     }
 };
