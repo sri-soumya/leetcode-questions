@@ -1,10 +1,8 @@
 class Solution {
 public:
-    
-
     int maxProduct(vector<int>& a) {
-     
-        int n=a.size(),i=0,j=n-1,l=1,r=1,ans=INT_MIN;
+        
+        int n=a.size(),l=1,r=1,i=0,j=n-1,m=INT_MIN;
         
         while(i<n&&j>=0)
         {
@@ -14,11 +12,12 @@ public:
                 r=1;
             l*=a[i];
             r*=a[j];
-            ans=max(ans,max(l,r));
             i++;j--;
+            m=max(m,max(l,r));
+            
         }
         
-        return ans;
+        return m;
         
     }
 };
