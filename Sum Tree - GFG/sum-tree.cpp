@@ -117,10 +117,40 @@ class Solution
         
     }
     
+    int sol(Node* root)
+    {
+        if(!root->left&&!root->right)
+        {
+            return root->data;
+        }
+        
+        int l=0,r=0;
+        
+        if(root->left)
+            l=sol(root->left);
+        
+        if(root->right)
+            r=sol(root->right);
+        
+        if(l==-1||r==-1)
+            return -1;
+            
+        if(root->data==l+r)
+            return 2*root->data;
+        
+        return -1;
+    }
+    
     bool isSumTree(Node* root)
     {
          // Your code here
-         return solve(root).second;
+         int s=0;
+         
+         if(!root->left&&!root->right)
+            return true;
+         
+         return sol(root)==2*root->data;
+         //return solve(root).second;
     }
 };
 
