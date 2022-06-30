@@ -68,7 +68,7 @@ public:
     
     int maxSumBST(TreeNode* root) {
         
-        return max(solve(root).h,0);
+        return (solve(root).h);
         
     }
 };
