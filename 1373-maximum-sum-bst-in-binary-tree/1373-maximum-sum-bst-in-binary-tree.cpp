@@ -10,13 +10,22 @@
  * };
  */
 
+
 class node{
     public:
-    bool bst;
-    int ma;
-    int mi;
+    int maxi;
+    int mini;
+    int h;
     int s;
-    int ans;
+    bool bst;
+    node()
+    {
+        maxi=INT_MIN;
+        mini=INT_MAX;
+        h=0;
+        s=0;
+        bst=true;
+    }
 };
 
 class Solution {
@@ -24,34 +33,42 @@ public:
     
     node solve(TreeNode* root)
     {
-        node ob;
+        node ans;
         if(!root)
         {
-            ob.bst=true;
-            ob.ma=INT_MIN;
-            ob.mi=INT_MAX;
-            ob.s=0;
-            ob.ans=0;
-            return ob;
+            return ans;
         }
         
-        auto l=solve(root->left);
-        auto r=solve(root->right);
+        node l=solve(root->left);
+        node r=solve(root->right);
         
-        ob.bst=l.bst&&r.bst&&root->val>l.ma&&root->val<r.mi;
-        ob.s=root->val+l.s+r.s;
-        ob.mi=min(root->val,l.mi);
-        ob.ma=max(root->val,r.ma);
-        if(ob.bst)
-            ob.ans=max(ob.s,max(l.ans,r.ans));
-        else
-            ob.ans=max(l.ans,r.ans);
-        return ob;
+        //cout<<root->val<<" "<<l.h<<" "<<l.s<<" "<<r.h<<" "<<r.s<<endl;
+        
+        if(l.maxi>=root->val||r.mini<=root->val||!l.bst||!r.bst)
+        {
+            ans.maxi=INT_MAX;
+            ans.mini=INT_MIN;
+            ans.h=max(l.h,r.h);
+            ans.s=root->val+l.s,r.s;
+            ans.bst=0;
+            return ans;
+        }
+        
+        ans.maxi=max(root->val,r.maxi);
+        ans.mini=min(root->val,l.mini);
+        ans.h=max(root->val+l.s+r.s,max(l.h,r.h));
+        ans.s=root->val+l.s+r.s;
+        ans.bst=1;
+        
+        //cout<<root->val<<" "<<ans.h<<" "<<ans.s<<endl;
+        
+        return ans;
     }
     
+    
     int maxSumBST(TreeNode* root) {
-        int ans=0;
-        return solve(root).ans;
-        return ans;
+        
+        return max(solve(root).h,0);
+        
     }
 };
