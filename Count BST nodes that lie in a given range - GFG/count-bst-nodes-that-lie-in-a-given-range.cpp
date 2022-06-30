@@ -93,10 +93,15 @@ public:
       if(!root)
         return 0;
         
-    if(root->data<l||root->data>h)
-        return getCount(root->left,l,h)+getCount(root->right,l,h)+0;
+    if(root->data>=l&&root->data<=h)
+        return getCount(root->left,l,h)+getCount(root->right,l,h)+1;
         
-    return getCount(root->left,l,h)+getCount(root->right,l,h)+1;
+    else if(root->data<l)
+        return getCount(root->right,l,h);
+    
+    return getCount(root->left,l,h);
+        
+    //return getCount(root->left,l,h)+getCount(root->right,l,h)+1;
     }
 };
 
