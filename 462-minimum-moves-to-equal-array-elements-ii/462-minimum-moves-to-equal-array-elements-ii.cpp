@@ -17,13 +17,11 @@ public:
         
         sort(a.begin(),a.end());
         
-        int c1=INT_MAX,c2=INT_MAX,n=a.size();
+        int c1=INT_MAX,n=a.size();
         
         c1=solve(a,a[n/2]);
-        if(n%2==0)
-            c2=solve(a,a[n/2-1]);
-        
-        return min(c1,c2);
+       
+        return c1;
         
     }
 };
