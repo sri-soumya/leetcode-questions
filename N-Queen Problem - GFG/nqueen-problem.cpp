@@ -27,7 +27,7 @@ public:
 
     void solve(int i,int n,vector<int> &a,vector<vector<int>> &b)
     {
-        if(i>n)
+        if(i==n)
         {
             if(a.size()==n)
                 b.push_back(a);
@@ -51,7 +51,7 @@ public:
         vector<vector<int>> ans;
         vector<int> a;
         
-        solve(1,n,a,ans);
+        solve(0,n,a,ans);
         return ans;
     }
 };
