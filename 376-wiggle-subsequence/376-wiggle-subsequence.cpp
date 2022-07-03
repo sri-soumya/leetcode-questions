@@ -40,9 +40,34 @@ public:
     int wiggleMaxLength(vector<int>& a) {
         
         int n=a.size();
-        vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(n+1,vector<int>(3,-1)));
+        //vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(n+1,vector<int>(3,-1)));
         
-        return solve(a,n,0,0,dp);
+        //return solve(a,n,0,0,dp);
+        //a[i][0]=+ve,a[i][1]=-ve
+        vector<vector<int>> dp(n,vector<int>(2,1));
+        
+        for(int i=1;i<n;i++)
+        {
+            if(a[i]>a[i-1])
+            {
+                dp[i][0]=dp[i-1][1]+1;
+                dp[i][1]=dp[i-1][1];
+            }
+            
+            else if(a[i]<a[i-1])
+            {
+                dp[i][0]=dp[i-1][0];
+                dp[i][1]=dp[i-1][0]+1;
+                
+            }
+            
+            else 
+            {
+                dp[i]=dp[i-1];
+            }
+        }
+        
+        return max(dp[n-1][0],dp[n-1][1]);
         
     }
 };
