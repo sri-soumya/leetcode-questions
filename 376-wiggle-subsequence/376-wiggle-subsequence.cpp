@@ -1,31 +1,48 @@
 class Solution {
 public:
-    
-    int wiggleMaxLength(vector<int>& a) {
-        int n=a.size();
-        vector<pair<int,int>> dp(n,{1,1});
-        for(int i=1;i<n;i++)
+    //k=0-any,=1-should be +ve,=2-should be -ve
+    int solve(vector<int> &a,int i,int j,int k,vector<vector<vector<int>>> &dp)
+    {
+        
+        if(i<=0)
+            return 0;
+        
+        if(dp[i][j][k]!=-1)
+            return dp[i][j][k];
+        
+        int c1=solve(a,i-1,j,k,dp),c2=-1e7;
+        
+        if(!j)
+            c2=solve(a,i-1,i,k,dp)+1;
+        
+        else
         {
-            
-            if(a[i]>a[i-1])
+            int z=a[j-1]-a[i-1];
+            if(!k)
             {
-                dp[i].first=dp[i-1].second+1;
-                dp[i].second=dp[i-1].second;
+                if(z<0)
+                    c2=solve(a,i-1,i,1,dp)+1;
+                else if(z>0)
+                    c2=solve(a,i-1,i,2,dp)+1;
             }
             
-            else if(a[i]<a[i-1])
-            {
-                dp[i].first=dp[i-1].first;
-                dp[i].second=dp[i-1].first+1;
-                
-            }
-            
-            else
-                dp[i]=dp[i-1];
+            else if(k==1&&z>0)
+                c2=solve(a,i-1,i,2,dp)+1;
+            else if(k==2&&z<0)
+                c2=solve(a,i-1,i,1,dp)+1;
             
         }
         
-        return max(dp[n-1].first,dp[n-1].second);
+        return dp[i][j][k]= max(c1,c2);
+        
+    }
+    
+    int wiggleMaxLength(vector<int>& a) {
+        
+        int n=a.size();
+        vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(n+1,vector<int>(3,-1)));
+        
+        return solve(a,n,0,0,dp);
         
     }
 };
