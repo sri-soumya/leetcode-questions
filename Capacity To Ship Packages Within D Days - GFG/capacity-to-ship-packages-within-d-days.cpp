@@ -31,7 +31,9 @@ class Solution {
     int leastWeightCapacity(int a[], int n, int d) {
         // code here
         
-        int ans=-1,l=0,u=100000000;
+        int ans=-1,l=0,u=0;
+        for(int i=0;i<n;i++)
+            u+=2*a[i];
         
         while(l<=u)
         {
