@@ -33,7 +33,7 @@ class Solution {
         
         int ans=-1,l=0,u=0;
         for(int i=0;i<n;i++)
-            u+=2*a[i];
+            u+=a[i];
         
         while(l<=u)
         {
