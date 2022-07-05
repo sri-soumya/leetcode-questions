@@ -7,7 +7,7 @@ public:
         int l=b.length();
          if(k==l)
             return true;
-        if(i<0||j<0||i>=m||j>=n||a[i][j]=='#')
+        if(i<0||j<0||i>=m||j>=n)
             return false;
        
         if(a[i][j]!=b[k])
