@@ -21,8 +21,8 @@ public:
     
     double champagneTower(int p, int r, int c) {
         
-        if(r==0&&c==0)
-            return min(p,1);
+        // if(r==0&&c==0)
+        //     return min(p,1);
         vector<vector<double>> dp(r+1,vector<double>(c+1,-1));
         return min(1.0,solve(p,r,c,dp));
         
