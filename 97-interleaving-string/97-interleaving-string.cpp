@@ -29,10 +29,10 @@ public:
         if(n+m!=k)
             return false;
         
-        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        //vector<vector<int>> dp(n+1,vector<int>(m+1,0));
         //return solve(s1,s2,s3,n,m,k,dp);
-        
-        dp[0][0]=1;
+        vector<int> dp(m+1,0);
+        dp[0]=1;
         
         for(int i=0;i<=n;i++)
         {
@@ -43,15 +43,15 @@ public:
                 int k=i+j;
                 bool f1=0,f2=0;
                 if(i>0&&s1[i-1]==s3[k-1])
-                    f1=dp[i-1][j];
+                    f1=dp[j];
                 if(j>0&&s2[j-1]==s3[k-1])
-                    f2=dp[i][j-1];
+                    f2=dp[j-1];
                 
-                dp[i][j]=f1||f2;
+                dp[j]=f1||f2;
                 
             }
         }
         
-        return dp[n][m];
+        return dp[m];
      }
 };
