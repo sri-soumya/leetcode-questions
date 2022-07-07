@@ -12,7 +12,7 @@ public:
                 dp.push_back(a[i]);
             else
             {
-                if(dp[in]>a[i])
+                //if(dp[in]>a[i])
                     dp[in]=a[i];
             }
             if(dp.size()==3)
