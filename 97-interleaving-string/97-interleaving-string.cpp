@@ -26,10 +26,32 @@ public:
         
         int n=s1.length(),m=s2.length(),k=s3.length();
         
-       // vector<vector<vector<int>>> dp(n,vector<vector<int>>(m,vector<int>(k,-1))); 
-        //vector<int> dp(m+1,-1);
-        vector<vector<int>> dp(n+1,vector<int>(m+1,-1));
-        return solve(s1,s2,s3,n,m,k,dp);
+        if(n+m!=k)
+            return false;
         
+        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+        //return solve(s1,s2,s3,n,m,k,dp);
+        
+        dp[0][0]=1;
+        
+        for(int i=0;i<=n;i++)
+        {
+            for(int j=0;j<=m;j++)
+            {
+                if(i==0&&j==0)
+                    continue;
+                int k=i+j;
+                bool f1=0,f2=0;
+                if(i>0&&s1[i-1]==s3[k-1])
+                    f1=dp[i-1][j];
+                if(j>0&&s2[j-1]==s3[k-1])
+                    f2=dp[i][j-1];
+                
+                dp[i][j]=f1||f2;
+                
+            }
+        }
+        
+        return dp[n][m];
      }
 };
