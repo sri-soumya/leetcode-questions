@@ -9,45 +9,39 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+#define ll unsigned long long int
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
         
-        unsigned long long int ans=0;
-        if(!root)
-            return 0;
-        queue<pair<TreeNode*,unsigned long long int>> q;
+        queue<pair<TreeNode*,ll>> q;
         q.push({root,0});
+        ll ans=0;
         
         while(q.size())
         {
-            TreeNode* t=q.front().first;
-            unsigned long long l=q.front().second;
-            q.pop();
-            unsigned long long x=q.size(),c=l;
-            if(t->left)
-                q.push({t->left,l*2+1});
-            if(t->right)
-                q.push({t->right,l*2+2});
-            while(x)
+            int n=q.size();
+            ll l=q.front().second,r=0;
+            for(int i=0;i<n;i++)
             {
-                x--;
-                //c++;
-                TreeNode* tt=q.front().first;
-                c=q.front().second;
+                auto t=q.front();
                 q.pop();
-                if(tt->left)
-                    q.push({tt->left,c*2+1});
-                if(tt->right)
-                    q.push({tt->right,c*2+2});
+                
+                if(t.first->left)
+                {
+                    q.push({t.first->left,t.second*2+1});
+                }
+                if(t.first->right)
+                {
+                    q.push({t.first->right,t.second*2+2});
+                }
+                if(i==n-1)
+                    r=t.second;
             }
             
-            ans=max(ans,c-l+1);
+            ans=max(ans,(r-l));
         }
         
-        return ans;
-        
-        //return ans;
-        
+        return ans+1;
     }
 };
