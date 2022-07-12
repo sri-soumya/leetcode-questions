@@ -14,7 +14,7 @@ public:
         int op1=1e7,op2=1e7;
         
         //copy
-        if(i>j)
+        //if(i>j)
             op1=solve(i,i,n,dp)+1;
         //paste
         if(j&&i+j<=n)
