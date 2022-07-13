@@ -1,30 +1,62 @@
 class Solution {
 public:
     
-    void dfs(vector<vector<int>> &a,vector<int> &v,int i)
+    int fparent(int x,vector<int> &parent)
     {
-        v[i]=1;
-        int n=a.size();
-        for(int j=0;j<n;j++)
+        if(parent[x]==x)
+            return x;
+        
+        return parent[x]=fparent(parent[x],parent);
+    }
+    
+    void Union(int a,int b,vector<int> &parent,vector<int> &rank)
+    {
+        int pa=fparent(a,parent);
+        int pb=fparent(b,parent);
+        
+        if(pa==pb)
+            return;
+        
+        if(rank[pa]>rank[pb])
         {
-            if(a[i][j]&&!v[j])
-                dfs(a,v,j);
+            parent[pb]=pa;
+        }
+        
+        else if(rank[pb]>rank[pa])
+        {
+            parent[pa]=pb;
+        }
+        
+        else
+        {
+            rank[pa]++;
+            parent[pb]=pa;
         }
     }
     
-    
     int findCircleNum(vector<vector<int>>& a) {
         
-        int n=a.size(),c=0;
-        vector<int> v(n,0);
+        int n=a.size();
+        vector<int> parent(n,0),rank(n,1);
+        
+        for(int i=0;i<n;i++)
+            parent[i]=i;
+        
+        int c=0;
         
         for(int i=0;i<n;i++)
         {
-            if(!v[i])
+            for(int j=0;j<n;j++)
             {
-                dfs(a,v,i);
-                c++;
+                if(a[i][j])
+                    Union(i,j,parent,rank);
             }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(parent[i]==i)
+                c++;
         }
         
         return c;
