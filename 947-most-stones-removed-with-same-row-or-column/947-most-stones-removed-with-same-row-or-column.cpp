@@ -3,11 +3,6 @@ public:
     
     int parent(int x,vector<int> &p,vector<int> &r)
     {
-        if(p[x]==-1)
-        {
-            return p[x]=x;
-            r[x]=1;
-        }
         if(p[x]==x)
             return x;
         
@@ -16,7 +11,6 @@ public:
     
     void Union(int a,int b,vector<int> &p,vector<int> &r)
     {
-        
         int pa=parent(a,p,r),pb=parent(b,p,r);
         if(pa==pb)
             return;
@@ -36,7 +30,7 @@ public:
         
         int n=a.size();
         
-        int c=0,x=0;
+        int c=0;
         
         vector<int> p(n,0),r(n,1);
         for(int i=0;i<n;i++)
