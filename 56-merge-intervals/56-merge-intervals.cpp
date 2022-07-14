@@ -3,24 +3,26 @@ public:
     vector<vector<int>> merge(vector<vector<int>>& a) {
         
         int n=a.size();
-        
         sort(a.begin(),a.end());
-        vector<vector<int>> ans;
         
-        for(int i=0;i<n;)
+        vector<vector<int>> ans;
+        vector<int> b=a[0];
+        
+        for(int i=1;i<n;i++)
         {
-            vector<int> b=a[i];
-            for(i=i+1;i<n;i++)
+            if(a[i][0]<=b[1])
             {
-                if(a[i][0]<=b[1])
-                {
-                    b[1]=max(a[i][1],b[1]);
-                }
-                else
-                    break;
+                b[0]=min(b[0],a[i][0]);
+                b[1]=max(b[1],a[i][1]);
             }
-            ans.push_back(b);
+            else
+            {
+                ans.push_back(b);
+                b=a[i];
+            }
         }
+        
+        ans.push_back(b);
         
         return ans;
         
