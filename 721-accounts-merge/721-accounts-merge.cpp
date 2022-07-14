@@ -29,7 +29,6 @@ public:
     
     void sortanddup(vector<vector<string>> &a,int x)
     {
-        //return;
         unordered_map<string,int> mp;
         
         vector<string> b;
@@ -49,15 +48,10 @@ public:
     
     void merge(vector<vector<string>>& a,int x,int y)
     {
-        
         for(int i=1;i<a[x].size();i++)
         {
-            // if(!mp.count(a[x][i]))
                 a[y].push_back(a[x][i]);
-            // mp[a[x][i]]++;
-        }
-        
-        
+        }   
     }
     
     vector<vector<string>> accountsMerge(vector<vector<string>>& a) {
