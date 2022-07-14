@@ -12,27 +12,33 @@
 class Solution {
 public:
     
-    TreeNode* solve(vector<int>& preorder, vector<int>& inorder,int a,int b,int c,int d)
+    TreeNode* solve(vector<int> &a,vector<int> &b,int pi,int ii,int pj,int ij)
     {
-        
-        if(a>b||c>d)
+        if(pi<0||ii<0||pi>pj||ii>ij)
             return NULL;
         
-        //cout<<a<<" "<<b<<" "<<c<<" "<<d<<endl;
+        TreeNode* t=new TreeNode(a[pi]);
         
-        TreeNode* t=new TreeNode(preorder[a]);
-        int i=c;
-        for(i=c;i<=d;i++)
-            if(inorder[i]==preorder[a])
+        int x=ii;
+        for(;x<=ij;x++)
+        {
+            if(b[x]==a[pi])
                 break;
-        int l=i-c;
-        t->left=solve(preorder,inorder,a+1,a+l,c,i-1);
-        t->right=solve(preorder,inorder,a+l+1,b,i+1,d);
+        }
+        
+        int l=x-ii;
+        
+        x--;
+        t->left=solve(a,b,pi+1,ii,pi+l,x);
+        t->right=solve(a,b,pi+l+1,x+2,pj,ij);
         
         return t;
     }
     
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        return solve(preorder,inorder,0,preorder.size()-1,0,preorder.size()-1);
+        
+        int n=preorder.size();
+        return solve(preorder,inorder,0,0,n-1,n-1);
+        
     }
 };
