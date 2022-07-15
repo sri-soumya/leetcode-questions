@@ -23,12 +23,6 @@ public:
             }
         }
         
-        // for(int i=0;i<n;i++)
-        // {
-        //     if(!v[i])
-        //         return false;
-        // }
-        
         return c==n;
         
     }
