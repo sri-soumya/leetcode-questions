@@ -2,7 +2,7 @@ class Solution {
 public:
     int orangesRotting(vector<vector<int>>& a) {
         
-        int m=a.size(),n=a[0].size();
+        int m=a.size(),n=a[0].size(),f=0;
         
         queue<pair<int,int>> q;
         
@@ -12,6 +12,8 @@ public:
             {
                 if(a[i][j]==2)
                     q.push({i,j});
+                if(a[i][j]==1)
+                    f++;
             }
         }
         
@@ -20,7 +22,6 @@ public:
         {
             c++;
             int l=q.size();
-            
             for(int k=0;k<l;k++)
             {
                 auto t=q.front();
@@ -39,19 +40,14 @@ public:
                     {
                         a[idi][jdj]=2;
                         q.push({idi,jdj});
+                        f--;
                     }
                 }
             }
         }
         
-        for(int i=0;i<m;i++)
-        {
-            for(int j=0;j<n;j++)
-            {
-                if(a[i][j]==1)
-                    return -1;
-            }
-        }
+        if(f)
+            return -1;
         
         return max(c,0);
         
