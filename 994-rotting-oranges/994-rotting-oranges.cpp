@@ -1,60 +1,59 @@
 class Solution {
 public:
-    
-    int orangesRotting(vector<vector<int>>& grid) {
+    int orangesRotting(vector<vector<int>>& a) {
+        
+        int m=a.size(),n=a[0].size();
         
         queue<pair<int,int>> q;
-        int n=grid.size(),m=grid[0].size(),t=0;
-        for(int i=0;i<n;i++)
+        
+        for(int i=0;i<m;i++)
         {
-            for(int j=0;j<m;j++)
+            for(int j=0;j<n;j++)
             {
-                if(grid[i][j]==2)
+                if(a[i][j]==2)
                     q.push({i,j});
-                if(grid[i][j])
-                    t++;
             }
         }
         
-        int c=0;
-        int z=0;
-        
+        int c=-1;
         while(q.size())
         {
+            c++;
             int l=q.size();
-            c+=l;
-            while(l)
+            
+            for(int k=0;k<l;k++)
             {
-                l--;
-                int r=q.front().first,c=q.front().second;
+                auto t=q.front();
                 q.pop();
-                if(r-1>=0&&grid[r-1][c]==1)
+                int x=t.first,y=t.second;
+                
+                a[x][y]=2;
+                
+                vector<int> di={-1,0,0,1};
+                vector<int> dj={0,-1,1,0};
+                
+                for(int z=0;z<4;z++)
                 {
-                    grid[r-1][c]=2;
-                    q.push({r-1,c});
-                }
-                if(r+1<n&&grid[r+1][c]==1)
-                {
-                    grid[r+1][c]=2;
-                    q.push({r+1,c});
-                }
-                if(c-1>=0&&grid[r][c-1]==1)
-                {
-                    grid[r][c-1]=2;
-                    q.push({r,c-1});
-                }
-                if(c+1<m&&grid[r][c+1]==1)
-                {
-                    grid[r][c+1]=2;
-                    q.push({r,c+1});
+                    int idi=x+di[z],jdj=y+dj[z];
+                    if(idi>=0&&idi<m&&jdj>=0&&jdj<n&&a[idi][jdj]==1)
+                    {
+                        a[idi][jdj]=2;
+                        q.push({idi,jdj});
+                    }
                 }
             }
-            if(q.size())
-                z++;
         }
         
-        if(c==t)
-            return z;
-        return -1;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(a[i][j]==1)
+                    return -1;
+            }
+        }
+        
+        return max(c,0);
+        
     }
 };
