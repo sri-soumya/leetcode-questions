@@ -26,12 +26,15 @@ public:
     int findPaths(int m, int n, int ma, int r, int c) {
         
         //vector<vector<vector<ll>>> dp(m,vector<vector<ll>>(n,vector<ll>(t+1,0)));
-        vector<vector<vector<ll>>> dp(ma+1,vector<vector<ll>>(m,vector<ll>(n,0)));
+        //vector<vector<vector<ll>>> dp(ma+1,vector<vector<ll>>(m,vector<ll>(n,0)));
+        vector<vector<ll>> dp(m,vector<ll>(n,0));
         vector<vector<int>> dir={{-1,0},{0,-1},{0,1},{1,0}};
         //return solve(i,j,t,m,n,dp)%mod;
         
         for(int t=1;t<=ma;t++)
         {
+            vector<vector<ll>> temp(m,vector<ll>(n,0));
+            
             for(int i=0;i<m;i++)
             {
                 for(int j=0;j<n;j++)
@@ -42,14 +45,16 @@ public:
                         int nj=j+d[1];
                         
                         if(ni<0||nj<0||ni>=m||nj>=n)
-                            dp[t][i][j]+=1%mod;
+                            temp[i][j]+=1%mod;
                         else
-                            dp[t][i][j]+=((t>0)?dp[t-1][ni][nj]:0)%mod;
+                            temp[i][j]+=((t>0)?dp[ni][nj]:0)%mod;
                     }
                 }
             }
+            
+            dp=temp;
         }
         
-        return dp[ma][r][c]%mod;
+        return dp[r][c]%mod;
     }
 };
