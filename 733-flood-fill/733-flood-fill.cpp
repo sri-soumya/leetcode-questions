@@ -1,43 +1,33 @@
 class Solution {
 public:
     
-    
-    void solve(vector<vector<int>>& image,int i,int j,int pi,int pj,int nc,int x,vector<vector<int>> &v)
+    void solve(vector<vector<int>>& a, int i, int j, int t)
     {
-        //cout<<i<<" "<<j<<endl;
-        int m=image.size(),n=image[0].size();
-        if(i>=m||j>=n||i<0||j<0)
+        int n=a.size(),m=a[0].size();
+        
+        if(a[i][j]==t)
             return;
-        if(image[i][j]!=x||v[i][j])
-            return;
-        v[i][j]=1;
-        x=image[i][j];
-        image[i][j]=nc;
-        if(i-1!=pi||j!=pj)
-            solve(image,i-1,j,i,j,nc,x,v);
-         if(i+1!=pi||j!=pj)
-            solve(image,i+1,j,i,j,nc,x,v);
-         if(i!=pi||j-1!=pj)
-            solve(image,i,j-1,i,j,nc,x,v);
-         if(i!=pi||j+1!=pj)
-            solve(image,i,j+1,i,j,nc,x,v);
+        int pc=a[i][j];
+        a[i][j]=t;
         
+        vector<int> dy={-1,0,0,1};
+        vector<int> dx={0,-1,1,0};
         
-        
+        for(int k=0;k<4;k++)
+        {
+            int ni=i+dy[k],nj=j+dx[k];
+            
+            if(ni<0||nj<0||ni>=n||nj>=m||a[ni][nj]!=pc)
+                continue;
+            solve(a,ni,nj,t);
+        }
     }
     
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
-        vector<vector<int>> v(image.size(),vector<int>(image[0].size(),0));
-        //cout<<v[0].size()<<endl;
-        v[sr][sc]=1;
-        int x=image[sr][sc];
-        image[sr][sc]=newColor;
-        solve(image,sr-1,sc,sr,sc,newColor,x,v);
-        solve(image,sr+1,sc,sr,sc,newColor,x,v);
-        solve(image,sr,sc-1,sr,sc,newColor,x,v);
-        solve(image,sr,sc+1,sr,sc,newColor,x,v);
+    vector<vector<int>> floodFill(vector<vector<int>>& a, int sr, int sc, int t) {
         
-        return image;
+        vector<vector<int>> b=a;
         
+        solve(b,sr,sc,t);
+        return b;
     }
 };
