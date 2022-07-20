@@ -12,7 +12,7 @@ public:
         
         for(auto x:w)
         {
-            cout<<x<<endl;
+            //cout<<x<<endl;
             int k=-1;
             bool f=1;
             for(auto j:x)
