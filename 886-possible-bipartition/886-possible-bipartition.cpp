@@ -1,53 +1,28 @@
 class Solution {
 public:
     
-//      bool dfs(vector<vector<int>> &a,vector<int> &v,int i,int c)
-//      {
-//          v[i]=c;
+     bool dfs(vector<vector<int>> &a,vector<int> &v,int i,int c)
+     {
+         v[i]=c;
          
-//          int nc;
-//          if(c==1)
-//              nc=2;
-//          else
-//              nc=1;
+         int nc;
+         if(c==1)
+             nc=2;
+         else
+             nc=1;
          
-//          for(auto x:a[i])
-//          {
-//              if(v[x]==v[i])
-//                  return false;
-//              else if(!v[x]&&!dfs(a,v,x,c))
-//                  return false;
+         for(auto x:a[i])
+         {
+             if(v[x]==v[i])
+                 return false;
+             else if(!v[x]&&!dfs(a,v,x,nc))
+                 return false;
                  
-//          }
+         }
          
-//          return true;
-//      }
+         return true;
+     }
     
-    bool dfs(vector<vector<int>>& e,vector<int> &v,int i,int c)
-    {
-        v[i]=c;
-        int z;
-        if(c==1)
-            z=2;
-        else
-            z=1;
-        
-        for(auto x:e[i])
-        {
-            if(!v[x])
-            {
-                if(!dfs(e,v,x,z))
-                    return false;
-                
-            }
-            
-            else if(v[x]==c)
-                return false;
-            
-        }
-        
-        return true;
-    }
     
     bool possibleBipartition(int n, vector<vector<int>>& a) {
         
