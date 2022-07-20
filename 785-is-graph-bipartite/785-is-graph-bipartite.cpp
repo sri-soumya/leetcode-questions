@@ -72,7 +72,7 @@ public:
         {
             if(v[i]!=0)
                 continue;
-            int c=bfs(e,v,i);
+            int c=dfs(e,v,i,1);
             if(c==0)
                 return false;
         }
