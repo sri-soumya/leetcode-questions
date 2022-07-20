@@ -12,7 +12,6 @@ public:
         
         for(auto x:w)
         {
-            //cout<<x<<endl;
             int k=-1;
             bool f=1;
             for(auto j:x)
@@ -28,7 +27,6 @@ public:
                     f=0;
                     break;
                 }
-                //cout<<k+1<<" "<<in<<endl;
                 k=mp[j][in];
             }
             
