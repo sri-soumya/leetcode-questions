@@ -4,7 +4,7 @@ public:
         
         int n=fruits.size(),l=0,r=0,ans=0;
         
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         
         while(l<n)
         {
