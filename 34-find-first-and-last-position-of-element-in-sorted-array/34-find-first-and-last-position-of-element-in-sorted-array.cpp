@@ -1,47 +1,54 @@
 class Solution {
 public:
     
-    int lb(vector<int> a,int t)
+    int firstoccur(vector<int> &nums,int x)
     {
-        int n=a.size();
-        int l=0,u=n-1;
-        while(l<=u)
+        int l=0,h=nums.size()-1,ans=-1;
+        
+        while(l<=h)
         {
-            int m=(l+u)/2;
-            if(t<=a[m])
-                u=m-1;
+            int m=(l+h)/2;
+            if(nums[m]==x)
+                ans=m;
+            if(nums[m]>=x)
+            {
+                h=m-1;
+            }
             else
                 l=m+1;
         }
         
-        return l;
+        return ans;
     }
     
-    int ub(vector<int> a,int t)
+    int lastoccur(vector<int> &nums,int x)
     {
-        int n=a.size();
-        int l=0,u=n-1;
-        while(l<=u)
+        int l=0,h=nums.size()-1,ans=-1;
+        
+        while(l<=h)
         {
-            int m=(l+u)/2;
-            if(t<a[m])
-                u=m-1;
-            else
+            int m=(l+h)/2;
+            if(nums[m]==x)
+                ans=m;
+            if(nums[m]<=x)
+            {
                 l=m+1;
+            }
+            else
+                h=m-1;
         }
         
-        return l;
+        return ans;
     }
     
     vector<int> searchRange(vector<int>& nums, int target) {
-        int a=lb(nums,target);
-        int b=ub(nums,target);
         
-        //int a=lower_bound(nums.begin(),nums.end(),target)-nums.begin();
-        //int b=upper_bound(nums.begin(),nums.end(),target)-nums.begin();
-        if(a==nums.size()||target!=nums[a])
+        int x=firstoccur(nums,target);
+        if(x==-1)
             return {-1,-1};
-        return {a,b-1};
+        int y=lastoccur(nums,target);
+        
+        return {x,y};
         
     }
 };
