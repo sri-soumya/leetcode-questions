@@ -13,26 +13,24 @@ public:
             mp[nums[i]]++;
         }
         
-        priority_queue<pii,vector<pii>,greater<pii>> q;
+        vector<vector<int>> freq(n+1);
         
         for(auto x:mp)
         {
-            if(q.size()<k)
-            {
-                q.push({x.ss,x.ff});
-            }
-            
-            else if(x.ss>q.top().ff)
-            {
-                q.pop();
-                q.push({x.ss,x.ff});
-            }
+            freq[x.ss].push_back(x.ff);
         }
         
-        while(q.size())
+        for(int i=freq.size()-1;i>=1;i--)
         {
-            ans.push_back(q.top().ss);
-            q.pop();
+            for(int j=0;j<freq[i].size();j++)
+            {
+                ans.push_back(freq[i][j]);
+                if(ans.size()==k)
+                    break;
+            }
+            
+            if(ans.size()==k)
+                break;
         }
         
         return ans;
