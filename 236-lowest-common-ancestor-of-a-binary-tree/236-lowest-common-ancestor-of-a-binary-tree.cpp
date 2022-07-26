@@ -10,32 +10,33 @@
 class Solution {
 public:
     
-    TreeNode* solve(TreeNode* root,TreeNode* p,TreeNode* q)
+    TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q)
     {
         if(!root)
             return NULL;
-        if(p==root||q==root)
+        
+        if(root->val==p->val||root->val==q->val)
             return root;
         
-        TreeNode* l=solve(root->left,p,q);
-        TreeNode* r=solve(root->right,p,q);
+        auto l=solve(root->left,p,q);
+        auto r=solve(root->right,p,q);
         
         if(!l&&!r)
             return NULL;
         
-        if(l&&!r)
-            return l;
-        if(!l&&r)
+        if(!l)
             return r;
         
+        if(!r)
+            return l;
+        
         return root;
-        
-        
     }
+
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        return solve(root,p,q);
         
+        return solve(root,p,q);
         
     }
 };
