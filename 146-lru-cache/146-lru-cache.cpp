@@ -1,99 +1,83 @@
-class node
-{
+#define ff first
+#define ss second
+class node{
     public:
     pair<int,int> data;
     node* next;
-    node* prev;
+    node *prev;
     
-    node(int k,int d)
+    node(int key,int value)
     {
-        data={k,d};
+        data={key,value};
         next=NULL;
         prev=NULL;
     }
-    
 };
 
 class LRUCache {
 public:
-    map<int,node*> x;
-    node* head;
-    node* tail;
-    int c;
+    
+    node* head,*tail;
+    int cap;
+    map<int,node*> mp;
+    
     LRUCache(int capacity) {
-        c=capacity;
+        
+        cap=capacity;
         head=new node(0,0);
         tail=new node(0,0);
+        
         head->next=tail;
         tail->prev=head;
-        
-    }
-    
-    void remove(node* n)
-    {
-        node* t=tail;
-        
-        n->prev->next=n->next;
-        n->next->prev=n->prev;
-        t=head;
-        
-        x.erase(n->data.first);
-    }
-    
-    void insert(int key,int value)
-    {
-        
-        node* n=new node(key,value);
-        
-        n->next=head->next;
-        n->prev=head;
-        head->next=n;
-        n->next->prev=n;
-        node* t=tail;
-        x[key]=n;
-        
     }
     
     int get(int key) {
         
-        if(!x.count(key))
+        if(!mp.count(key))
             return -1;
-        node* t=x[key];
         
-        remove(t);
-        insert(t->data.first,t->data.second);
+        int x=mp[key]->data.ss;
+        remove(key);
+        insert(key,x);
         
-        return t->data.second;
+        return x;
     }
     
     void put(int key, int value) {
         
-        if(!x.count(key))
+        if(mp.size()<cap&&!mp.count(key))
+            insert(key,value);
+        else if(mp.count(key))
         {
-            if(x.size()>=c)
-            {
-                
-                remove(tail->prev);
-                insert(key,value);
-                
-            }
-            else
-            {
-                
-                insert(key,value);
-                
-            }
-            
+            remove(key);
+            insert(key,value);
         }
         else
         {
-            node* t=x[key];
-            remove(t);
+            remove(tail->prev->data.ff);
             insert(key,value);
-            
         }
+    }
+    
+    void remove(int key)
+    {
+        node* t=mp[key];
+        t->prev->next=t->next;
+        t->next->prev=t->prev;
         
+        mp.erase(key);
+    }
+    
+    void insert(int key,int value)
+    {
+        node *t=new node(key,value);
+        t->next=head->next;
+        t->prev=head;
+        head->next=t;
+        t->next->prev=t;
+        mp[key]=t; 
         
+        node* temp=head;
     }
 };
 
