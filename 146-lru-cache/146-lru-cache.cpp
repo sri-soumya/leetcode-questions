@@ -19,7 +19,7 @@ public:
     
     node* head,*tail;
     int cap;
-    map<int,node*> mp;
+    unordered_map<int,node*> mp;
     
     LRUCache(int capacity) {
         
