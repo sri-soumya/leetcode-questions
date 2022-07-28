@@ -9,9 +9,6 @@ public:
     
     void push(int x) {
         q.push(x);
-    }
-    
-    int pop() {
         
         int n=q.size();
         
@@ -21,23 +18,17 @@ public:
             q.pop();
             q.push(x);
         }
+    }
+    
+    int pop() {
+        
         int x=q.front();
         q.pop();
         return x;
     }
     
     int top() {
-        int n=q.size();
-        
-        for(int i=0;i<n-1;i++)
-        {
-            int x=q.front();
-            q.pop();
-            q.push(x);
-        }
         int x=q.front();
-        q.pop();
-        q.push(x);
         return x;
     }
     
