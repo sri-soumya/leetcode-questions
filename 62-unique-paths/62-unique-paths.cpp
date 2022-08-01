@@ -3,17 +3,16 @@ public:
     int uniquePaths(int m, int n) {
         
         m--;n--;
-        int ma=max(m,n)+1;
-        int a=m+n;
+        
         long long int p=1;
+        int x=m+n;
         
-        for(int i=ma;i<=a;i++)
+        for(int i=max(m,n)+1,j=1;i<=x&&j<=min(m,n);i++,j++)
+        {
             p*=i;
-        
-        for(int i=2;i<=min(m,n);i++)
-            p/=i;
+            p/=j;
+        }
         
         return p;
-        
     }
 };
