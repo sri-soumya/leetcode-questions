@@ -1,47 +1,48 @@
-
+#define ll long long int
 class MinStack {
 public:
-    stack<long long> s;
-    long long mini;
+    stack<ll> s;
+    int m=INT_MAX;
     MinStack() {
-        //s=new vector<int>;
-        mini=INT_MAX;
+        
     }
     
-    void push(long long val) {
+    void push(int val) {
+        
         if(!s.size())
         {
             s.push(val);
-            mini=val;
+            m=val;    
         }
-        else if(val>mini)
+        else if(val>=m)
             s.push(val);
-        else
+        else if(val<m)
         {
-            s.push(2*val-mini);
-            mini=val;
+            s.push(2*(ll)val-m);
+            m=val;
         }
+        
     }
     
     void pop() {
-        if(s.top()>mini)
-            s.pop();
-        else
+        if(s.top()<m)
         {
-            mini=2*mini-s.top();
-            s.pop();
+            m=2ll*m-s.top();
+            
         }
+        s.pop();
     }
     
     int top() {
-        if(s.top()>mini)
-            return s.top();
-        return mini;
+        
+        if(s.top()<m)
+            return m;
+        return s.top();
         
     }
     
     int getMin() {
-        return mini;
+        return m;
     }
 };
 
