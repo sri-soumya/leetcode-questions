@@ -6,30 +6,44 @@ public:
         if(k>=n)
             return "0";
         stack<char> s;
-        k=n-k;
         
         for(int i=0;i<n;i++)
         {
-            while(s.size()&&(s.size()+n-1-i)>=k&&num[i]<s.top())
+            char c=num[i];
+            while(s.size()&&k&&num[i]<s.top())
+            {
+                k--;
                 s.pop();
+            }
             s.push(num[i]);
         }
-        while(s.size()>k)
-            s.pop();
-        string ans="";
-        while(s.size())
+        
+        while(s.size()&&k)
         {
-            ans=s.top()+ans;
+            k--;
             s.pop();
         }
         
-        int i=0;
-        while(i<ans.size()&&ans[i]=='0')
+        string ans="";
+        
+        while(s.size())
         {
-            i++;
+            ans+=s.top();
+            s.pop();
         }
-        if(i==ans.size())
+        
+        reverse(ans.begin(),ans.end());
+        
+        int in=0;
+        while(in<ans.size()&&ans[in]=='0')
+            in++;
+        
+        if(in==ans.size())
             return "0";
-        return ans.substr(i);
+        
+        
+        return ans.substr(in);
+        return ans;
+        
     }
 };
