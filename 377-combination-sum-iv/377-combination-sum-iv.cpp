@@ -1,3 +1,4 @@
+#define ll unsigned long long int
 class Solution {
 public:
     
@@ -23,8 +24,17 @@ public:
     
     int combinationSum4(vector<int>& nums, int target) {
         int n=nums.size();
-        vector<int> dp(target+1,-1);
-        return solve(nums,target,dp);
+        vector<ll> dp(target+1,0);
+        //return solve(nums,target,dp);
+        dp[0]=1;
+        for(int i=1;i<=target;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                dp[i]+=(i-nums[j]>=0)?dp[i-nums[j]]:0;
+            }
+        }
         
+        return dp[target];
     }
 };
