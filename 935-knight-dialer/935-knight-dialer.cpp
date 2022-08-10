@@ -37,12 +37,25 @@ public:
         
         ll ans=0;
         
-        vector<vector<ll>> dp(n+1,vector<ll>(10,-1));
+        vector<vector<ll>> dp(n+1,vector<ll>(10,1));
+        
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=0;j<10;j++)
+            {
+                ll c=0;
+                
+                for(auto x:a[j])
+                {
+                    c+=(dp[i-1][x])%mod;
+                }
+                
+                dp[i][j]=c%mod;
+            }
+        }
         
         for(int i=0;i<10;i++)
-        {
-            ans+=solve(a,n-1,i,dp)%mod;
-        }
+            ans+=dp[n-1][i]%mod;
         
         return ans%mod;
     }
