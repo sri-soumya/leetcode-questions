@@ -25,9 +25,33 @@ public:
     
     double knightProbability(int n, int k, int row, int column) {
         
-        vector<vector<vector<double>>> dp(n,vector<vector<double>>(n,vector<double>(k+1,-1))); 
+        vector<vector<vector<double>>> dp(n,vector<vector<double>>(n,vector<double>(k+1,1))); 
         
-        return solve(n,k,row,column,dp);
+        //return solve(n,k,row,column,dp);
+        
+        for(int i=1;i<=k;i++)
+        {
+            for(int r=0;r<n;r++)
+            {
+                for(int c=0;c<n;c++)
+                {
+                    vector<vector<int>> moves={{-1,-2},{-2,-1},{-2,1},{-1,2},{1,2},{2,1},{2,-1},{1,-2}};
+                    double ans=0.0;
+                    
+                    for(auto x:moves)
+                    {
+                        int nr=r+x[0],nc=c+x[1];
+                        if(nr<0||nr>=n||nc<0||nc>=n)
+                            continue;
+                        ans+=dp[nr][nc][i-1];
+                    }
+                    
+                    dp[r][c][i]=ans/8.0;
+                }
+            }
+        }
+        
+        return dp[row][column][k];
         
     }
 };
