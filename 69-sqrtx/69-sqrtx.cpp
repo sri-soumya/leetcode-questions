@@ -3,7 +3,7 @@ public:
     int mySqrt(int x) {
         
         double l=0,u=x;
-        int i=1000;
+        int i=100;
         double ans=0;
         
         while(l<=u&&--i)
