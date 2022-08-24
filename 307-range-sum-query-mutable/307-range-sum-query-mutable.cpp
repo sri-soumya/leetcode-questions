@@ -44,7 +44,7 @@ public:
     
     NumArray(vector<int>& nums) {
         n=nums.size();
-        st.resize(5*n);
+        st.resize(4*n);
         build(0,0,n-1,nums,st);
     }
     
