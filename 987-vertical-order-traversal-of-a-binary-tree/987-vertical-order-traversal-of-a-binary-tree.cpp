@@ -1,3 +1,5 @@
+#define ff first
+#define ss second
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -9,42 +11,47 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-#define ff first
-#define ss second
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        vector<vector<int>> ans;
+        
         if(!root)
-            return ans;
+            return {};
+        
+        map<int,map<int,multiset<int>>> mp;
         queue<pair<TreeNode*,pair<int,int>>> q;
-        map<int,map<int,multiset<int>>> x;
-        //return ans;
         q.push({root,{0,0}});
+        
         while(q.size())
         {
-            TreeNode* t=q.front().first;
-            int xc=q.front().second.first;
-            int yc=q.front().second.second;
+            auto x=q.front().ff;
+            auto y=q.front().ss;
             q.pop();
-            x[xc][yc].insert(t->val);
-            if(t->left)
-                q.push({t->left,{xc-1,yc+1}});
-            if(t->right)
-                q.push({t->right,{xc+1,yc+1}});
+            if(x->left)
+                q.push({x->left,{y.ff-1,y.ss+1}});
+            if(x->right)
+                q.push({x->right,{y.ff+1,y.ss+1}});
+            
+            mp[y.ff][y.ss].insert(x->val);
         }
         
-        for(auto i:x)
+        vector<vector<int>> ans;
+        
+        for(auto x:mp)
         {
+            
             vector<int> a;
-            for(auto j:i.second)
+            
+            for(auto y:x.ss)
             {
-                for(auto k:j.second)
-                    a.push_back(k);
+                for(auto z:y.ss)
+                    a.push_back(z);
             }
+            
             ans.push_back(a);
         }
         
         return ans;
+        
     }
 };
