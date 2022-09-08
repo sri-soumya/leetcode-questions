@@ -36,13 +36,6 @@ public:
         }
     }
     
-    void print(vector<int> &a)
-    {
-        for(int i=0;i<32;i++)
-            cout<<a[i]<<" ";
-        cout<<endl;
-    }
-    
     int longestNiceSubarray(vector<int>& nums) {
         
         int n=nums.size();
@@ -57,18 +50,12 @@ public:
                 if(!check(a))
                 {
                     sub(a,nums[j]);
-                    // j++;
                     break;
                 }
                 j++;
             }
             
-            //cout<<i<<" "<<j<<endl;
-            
-            //print(a);
-            
-            //if(check(a))
-                ans=max(ans,j-i);
+            ans=max(ans,j-i);
             
             sub(a,nums[i]);
             
