@@ -22,11 +22,40 @@ public:
     }
     
     vector<int> inorderTraversal(TreeNode* root) {
-        
         vector<int> a;
         
-        solve(root,a);
-        return a;
+        auto cur=root;
         
+        while(cur)
+        {
+            if(!cur->left)
+            {
+                a.push_back(cur->val);
+                cur=cur->right;
+            }
+            
+            else
+            {
+                auto prev=cur->left;
+                while(prev->right&&prev->right!=cur)
+                {
+                    prev=prev->right;
+                }
+                
+                if(!prev->right)
+                {
+                    prev->right=cur;
+                    cur=cur->left;
+                }
+                else
+                {
+                    prev->right=NULL;
+                    a.push_back(cur->val);
+                    cur=cur->right;
+                }
+            }
+        }
+        
+        return a;
     }
 };
