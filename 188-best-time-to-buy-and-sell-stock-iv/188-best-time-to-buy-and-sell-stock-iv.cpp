@@ -1,34 +1,35 @@
 class Solution {
 public:
-    int maxProfit(int m, vector<int>& a) {
+    
+    int solve(vector<int> &prices,int i,int k,int f,vector<vector<vector<int>>> &dp)
+    {
+        int n=prices.size();
         
-        int n=a.size();
-        //vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(2,vector<int>(m+1,0)));
-        //return solve(a,0,1,2,dp);
+        if(k<0)
+            return -1e7;
         
-        vector<vector<int>> ahead(2,vector<int>(m+1,0)),cur(2,vector<int>(m+1,0));
+        if(i==n)
+            return 0;
         
-        for(int i=n-1;i>=0;i--)
-        {
-            for(int f=0;f<2;f++)
-            {
-                for(int k=1;k<=m;k++)
-                {
-                    if(f)
-                    {
-                        cur[f][k]=max(-a[i]+ahead[0][k],ahead[1][k]);
-                    }
-                    else
-                    {
-                        cur[f][k]=max(a[i]+ahead[1][k-1],ahead[0][k]);
-                    }
-                }
-            }
-            
-            ahead=cur;
-        }
+        if(dp[i][k][f]!=-1)
+            return dp[i][k][f];
         
-        return ahead[1][m];
+        int c1=solve(prices,i+1,k,f,dp);
+        int c2=0;
         
+        if(f)
+            c2=solve(prices,i+1,k-1,0,dp)+prices[i];
+        else
+            c2=solve(prices,i+1,k,1,dp)-prices[i];
+        
+        return dp[i][k][f]= max(c1,c2);
+        
+    }
+    
+    int maxProfit(int k, vector<int>& prices) {
+        
+        int n=prices.size();
+        vector<vector<vector<int>>> dp(n,vector<vector<int>>(k+1,vector<int>(2,-1)));
+        return solve(prices,0,k,0,dp);
     }
 };
