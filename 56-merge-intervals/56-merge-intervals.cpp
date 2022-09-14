@@ -2,12 +2,12 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& a) {
         
-        int n=a.size();
         sort(a.begin(),a.end());
         
         vector<vector<int>> ans;
-        vector<int> b=a[0];
-        
+        vector<int> b;
+        b=a[0];
+        int n=a.size();
         for(int i=1;i<n;i++)
         {
             if(a[i][0]<=b[1])
@@ -21,10 +21,7 @@ public:
                 b=a[i];
             }
         }
-        
         ans.push_back(b);
-        
         return ans;
-        
     }
 };
