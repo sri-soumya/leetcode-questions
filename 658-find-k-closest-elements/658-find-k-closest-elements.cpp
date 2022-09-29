@@ -1,38 +1,21 @@
-#define pii pair<int,int>
-#define ff first
-#define ss second
 class Solution {
 public:
-    vector<int> findClosestElements(vector<int>& arr, int k, int y) {
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
-        int n=arr.size();
-        priority_queue<pii> q;
+        int h=arr.size()-1,l=0;
         
-        for(int i=0;i<n;i++)
+        while(h-l>=k)
         {
-            int x=abs(y-arr[i]);
-            if(q.size()<k)
-            {
-                q.push({x,i});
-                continue;
-            }
-            //cout<<i<<" "<<x<<" "<<q.top().ff<<endl;
-            if(x<q.top().ff)
-            {
-                q.pop();
-                q.push({x,i});
-            }
+            if(abs(arr[l]-x)>abs(arr[h]-x))
+                l++;
+            else
+                h--;
         }
         
         vector<int> ans;
         
-        while(q.size())
-        {
-            ans.push_back(arr[q.top().ss]);
-            q.pop();
-        }
-        
-        sort(ans.begin(),ans.end());
+        for(int i=l;i<=h;i++)
+            ans.push_back(arr[i]);
         
         return ans;
     }
