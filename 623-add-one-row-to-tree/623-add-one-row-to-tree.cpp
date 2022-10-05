@@ -24,6 +24,7 @@ public:
             nr->right=root->right;
             root->left=nl;
             root->right=nr;
+            return;
         }    
         
         solve(root->left,val,depth-1);
