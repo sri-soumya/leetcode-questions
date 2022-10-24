@@ -13,7 +13,7 @@ public:
     
     int add(vector<int> &a,string &s)
     {
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         for(auto x:s)
         {
             if(a[x-'a']>0||mp.count(x))
