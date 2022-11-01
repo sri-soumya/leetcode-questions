@@ -4,8 +4,8 @@ public:
     int solve(int i,int j,vector<vector<int>>& grid)
     {
         int m=grid.size(),n=grid[0].size();
-        if(j<0||j>=n)
-            return -1;
+        // if(j<0||j>=n)
+        //     return -1;
         
         if(i==m)
             return j;
