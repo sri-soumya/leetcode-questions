@@ -1,7 +1,7 @@
 class Solution {
 public:
     int longestPalindrome(vector<string>& words) {
-        map<string,int> mp;
+        unordered_map<string,int> mp;
         int c=0;
         
         for(auto x:words)
@@ -34,7 +34,6 @@ public:
                 if(z)
                     c+=(z-1)*2;
                 z=x.second;
-                // c+=x.second*2;
             }
             else if(x.second%2)
             {
