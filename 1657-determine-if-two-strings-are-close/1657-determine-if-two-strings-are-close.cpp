@@ -1,17 +1,55 @@
 class Solution {
 public:
     bool closeStrings(string word1, string word2) {
-        unordered_map<int, int> seen1, seen2;
-        vector<int> freq1(26, 0), freq2(26, 0);
-        if (word1.size() != word2.size()) return false;
-        for (auto c : word1) ++freq1[c - 'a'];
-        for (auto c : word2) ++freq2[c - 'a'];
-        for (int i = 0; i < 26; ++i)
-            if ((freq1[i] and !freq2[i]) or 
-                (!freq1[i] and freq2[i])) return false;
-        for (auto n : freq1) seen1[n]++;
-        for (auto n : freq2) seen2[n]++;
+        vector<int> a(26,0),b(26,0);
         
-        return seen1 == seen2;
+        int c1=0,c2=0,n=word1.size(),m=word2.size();
+        
+        if(n!=m)
+            return 0;
+        
+        for(int i=0;i<n;i++)
+        {
+            int x=word1[i]-'a';
+            int y=word2[i]-'a';
+            
+            if(!a[x])
+                c1++;
+            if(!b[y])
+                c2++;
+            
+            a[x]++;
+            b[y]++;
+        }
+        
+        if(c1!=c2)
+            return 0;
+        
+        for(int i=0;i<26;i++)
+        {
+            if(a[i]&&!b[i]||!a[i]&&b[i])
+                return 0;
+        }
+        
+        for(int i=0;i<26;i++)
+        {
+            if(!a[i])
+                continue;
+            int f=0;
+            for(int j=0;j<26;j++)
+            {
+                if(a[i]==b[j])
+                {
+                    f=1;
+                    b[j]=0;
+                    break;
+                }
+            }
+            
+            if(!f)
+                return 0;
+        }
+        
+        return 1;
     }
 };
