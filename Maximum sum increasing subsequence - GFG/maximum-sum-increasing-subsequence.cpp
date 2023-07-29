@@ -26,11 +26,16 @@ class Solution{
 	int maxSumIS(int arr[], int n)  
 	{  
 	    // Your code goes here
-	    vector<int> dp(n,-1);
+	    vector<int> dp(n,0);
 	    int ans=0;
-	    for(int i=0;i<n;i++)
+	    for(int i=n-1;i>=0;i--)
 	    {
-	        ans=max(ans,solve(arr,i,n,dp));
+	        dp[i]=arr[i];
+	        for(int j=i+1;j<n;j++)
+	        {
+	            if(arr[j]>arr[i]) dp[i]=max(dp[i],dp[j]+arr[i]);
+	        }
+	        ans=max(ans,dp[i]);
 	    }
 	    return ans;
 	}  
