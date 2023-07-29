@@ -19,11 +19,25 @@ public:
         return dp[i][j]= ans;
     }
 
-    int matrixMultiplication(int n, int arr[])
+    int matrixMultiplication(int n, int a[])
     {
         // code here
-        vector<vector<int>> dp(n,vector<int>(n,-1));
-        return solve(arr,1,n-1,dp);
+        vector<vector<int>> dp(n,vector<int>(n,0));
+        // return solve(a,1,n-1,dp);
+        for(int i=n-1;i>=1;i--)
+        {
+            
+            for(int j=i+1;j<n;j++)
+            {
+                // if(i==j) continue;
+                int ans=INT_MAX;
+                for(int k=i;k<j;k++)
+                    ans=min(ans,a[i-1]*a[k]*a[j]+dp[i][k]+dp[k+1][j]);
+                dp[i][j]=ans;
+            }
+            
+        }
+        return dp[1][n-1];
     }
 };
 
