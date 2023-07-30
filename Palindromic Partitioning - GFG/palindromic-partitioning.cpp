@@ -37,8 +37,21 @@ public:
     {
         // code here
         int n=str.size();
-        vector<int> dp(n,-1);
-        return solve(str,0,dp)-1;
+        vector<int> dp(n+1,1e7);
+        // return solve(str,0,dp)-1;
+        dp[n]=0;
+        for(int i=n-1;i>=0;i--)
+        {
+            int ans=1e7;
+            for(int j=i;j<n;j++)
+            {
+                if(ispal(str,i,j))
+                    ans=min(ans,dp[j+1]+1);
+            }
+            dp[i]=ans;
+        }
+        
+        return dp[0]-1;
     }
 };
 
