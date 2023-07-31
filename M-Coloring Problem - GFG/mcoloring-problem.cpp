@@ -1,57 +1,43 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
 
- // } Driver Code Ends
-//Function to determine if graph can be coloured with at most M colours such
-//that no two adjacent vertices of graph are coloured with same colour.
-bool solve(bool graph[101][101],int m,int n,int i,vector<int>& b)
-{
-   
-    if(i>=n)
+// } Driver Code Ends
+class Solution{
+public:
+    // Function to determine if graph can be coloured with at most M colours such
+    // that no two adjacent vertices of graph are coloured with same colour.
+    bool solve(bool graph[101][101], int m, int n, int i, vector<int> &f)
     {
-        return true;
-    }
-        
-        
-    for(int x=1;x<=m;x++)
-    {
-        // cout<<i<<" "<<x<<endl;
-        bool f=true;
-        for(int j=0;j<n;j++)
+        if(i>=n) return 1;
+        for(int x=0;x<m;x++)
         {
-            if((graph[i][j])&&b[j]==x)
+            bool ff=1;
+            for(int j=0;j<n;j++)
             {
-                //cout<<i<<" "<<x<<endl;
-                f=false;
-                //break;
+                if(graph[i][j]&&f[j]==x)
+                {
+                    ff=0;
+                    break;
+                }
             }
+            if(!ff) continue;
+            f[i]=x;
+            if(solve(graph,m,n,i+1,f)) return 1;
+            f[i]=-1;
         }
         
-        if(f)
-        {
-            //cout<<i<<" "<<x<<endl;
-            b[i]=x;
-            bool ff=solve(graph,m,n,i+1,b);
-            if(ff)
-                return true;
-            b[i]=0;
-        }
+        return 0;
     }
-    
-    return false;
-    
-}
+    bool graphColoring(bool graph[101][101], int m, int n) {
+        // your code here
+        vector<int> f(n,-1);
+        return solve(graph,m,n,0,f);
+    }
+};
 
-bool graphColoring(bool graph[101][101], int m, int n)
-{
-    // your code here
-    vector<int> b(n,0);
-    return solve(graph,m,n,0,b);
-}
-
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main() {
     int t;
@@ -70,8 +56,10 @@ int main() {
             graph[a - 1][b - 1] = 1;
             graph[b - 1][a - 1] = 1;
         }
-        cout << graphColoring(graph, m, n) << endl;
+        Solution ob;
+        cout << ob.graphColoring(graph, m, n) << endl;
     }
     return 0;
 }
-  // } Driver Code Ends
+
+// } Driver Code Ends
