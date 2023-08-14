@@ -12,25 +12,28 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    vector <int> dijkstra(int n, vector<vector<int>> adj[], int s)
+    vector <int> dijkstra(int n, vector<vector<int>> adj[], int so)
     {
         // Code here
         
         vector<int> d(n,INT_MAX);
-        d[s]=0;
-        priority_queue<pii,vector<pii>,greater<pii>> q;
-        q.push({0,s});
+        d[so]=0;
+        set<pii> s;
+        s.insert({0,so});
         
-        while(q.size())
+        while(s.size())
         {
-            auto x=q.top();
-            q.pop();
-            for(auto y:adj[x.ss])
+            auto x=*s.begin();
+            s.erase(x);
+            
+            int in=x.ss,di=x.ff;
+            for(auto y:adj[in])
             {
-                if(x.ff+y[1]<=d[y[0]])
+                if(di+y[1]<d[y[0]])
                 {
-                    d[y[0]]=x.ff+y[1];
-                    q.push({x.ff+y[1],y[0]});
+                    if(d[y[0]]!=INT_MAX) s.erase({d[y[0]],y[0]});
+                    d[y[0]]=di+y[1];
+                    s.insert({d[y[0]],y[0]});
                 }
             }
         }
