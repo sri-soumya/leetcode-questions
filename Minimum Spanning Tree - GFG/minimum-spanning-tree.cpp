@@ -3,33 +3,55 @@
 using namespace std;
 
 // } Driver Code Ends
-
-#define vi vector<int>
 class Solution
 {
 	public:
+	
+	int parent(int x, vector<int> &p)
+	{
+	    if(x==p[x]) return x;
+	    return p[x]=parent(p[x],p);
+	}
+	
+	void Union(int a, int b, vector<int> &p, vector<int> &rank)
+	{
+	    if(rank[a]>rank[b]) p[b]=a;
+	    else if(rank[b]>rank[a]) p[a]=b;
+	    else
+	    {
+	        p[b]=a;
+	        rank[a]++;
+	    }
+	}
+	
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int n, vector<vector<int>> adj[])
     {
         // code here
+        vector<vector<int>> e;
+        vector<int> p(n),rank(n,1);
         
-        priority_queue<vi,vector<vi>,greater<vi>> q;
-        q.push({0,0,-1});
+        for(int i=0;i<n;i++) p[i]=i;
+        
         int c=0;
-        vector<bool> v(n,0);
-        while(q.size())
+        for(int i=0;i<n;i++)
         {
-            auto t=q.top();
-            q.pop();
-            
-            if(v[t[1]]) continue;
-            v[t[1]]=1;
-            if(t[2]!=-1) c+=t[0];
-            
-            for(auto x:adj[t[1]])
+            for(auto x:adj[i])
             {
-                if(!v[x[0]])
-                    q.push({x[1],x[0],t[1]});
+               e.push_back({x[1],i,x[0]}); 
+            }
+                
+        }
+        
+        sort(e.begin(),e.end());
+        
+        for(auto x:e)
+        {
+            int p1=parent(x[1],p),p2=parent(x[2],p);
+            if(p1!=p2)
+            {
+                Union(p1,p2,p,rank);
+                c+=x[0];
             }
         }
         
